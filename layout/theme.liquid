@@ -24,6 +24,11 @@
 
   {% render 'meta-tags' %}
 
+  <!-- Standard Shopify Dawn Core Scripts -->
+  <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+
   <!-- Base Custom Font & Shopify styles -->
   {{ 'custom-font.css' | asset_url | stylesheet_tag }}
   {{ 'base.css' | asset_url | stylesheet_tag }}
