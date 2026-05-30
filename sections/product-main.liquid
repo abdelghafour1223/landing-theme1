@@ -4,13 +4,44 @@
   .order-submit-btn,
   .order-submit-btn:hover,
   .order-submit-btn:focus,
-  .order-submit-btn .btn-text,
   #ProductSubmitButton-template--28684899876945__main,
   #sticky-order-btn,
   #sticky-order-btn:hover {
     background-color: {{ section.settings.button_bg_color }} !important;
     background-image: none !important;
     color: {{ section.settings.button_text_color }} !important;
+  }
+
+  /* Fix submit button inner pill distortion */
+  button.order-submit-btn {
+    background-color: {{ section.settings.button_bg_color }} !important;
+    color: {{ section.settings.button_text_color }} !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    border-radius: 40px !important;
+    padding: 16px 24px !important;
+    border: none !important;
+  }
+  button.order-submit-btn .btn-text {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: {{ section.settings.button_text_color }} !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    display: inline !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Fix WhatsApp floating button SVG stretch distortion */
+  .whatsapp-icon-wrapper svg {
+    width: 32px !important;
+    height: 32px !important;
+    max-width: 32px !important;
+    max-height: 32px !important;
+    display: block !important;
   }
 </style>
 

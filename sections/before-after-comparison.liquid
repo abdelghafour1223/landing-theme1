@@ -1,51 +1,45 @@
-
-
-
-
-
 <link href="{{ 'section-statistics.css' | asset_url }}" rel="stylesheet" type="text/css" media="all">
 
 <div class="before-after-section" style="background-color: #ffffff;">
   <div class="page-width">
     <div class="before-after-container contained" style="
-      
         padding: 0px 0px 0px 0px;
         border-radius: 8px;
         background: linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(248, 248, 248, 1) 100%);
-        
-          border: 1px solid #e5e7eb;
-        
-        
-      
+        border: 1px solid #e5e7eb;
     ">
       <div class="image-comparison-container-template--28684899876945__before_after_comparison_dg6PAy">
         
+        {%- if section.settings.title != blank -%}
           <h2 class="comparison-title-template--28684899876945__before_after_comparison_dg6PAy">
-            غيري تجربة الرضاعة الطبيعية مع
-            
-              <span class="accent-text global-accent-text">Tighli اللاسلكية</span>
-            
+            {{ section.settings.title }}
           </h2>
+        {%- endif -%}
         
-        
-        
-          <p class="comparison-description-template--28684899876945__before_after_comparison_dg6PAy">احصلي على راحة كاملة من أول استعمال. مضخة Tighli الذكية كتسهل عليك الرضاعة الطبيعية وكتوفر ليك الوقت باش ترتاحي وتعتني بطفلك بلا عذاب وبلا آلام.</p>
-        
+        {%- if section.settings.description != blank -%}
+          <p class="comparison-description-template--28684899876945__before_after_comparison_dg6PAy">
+            {{ section.settings.description }}
+          </p>
+        {%- endif -%}
         
         <div class="slider-container-template--28684899876945__before_after_comparison_dg6PAy" id="sliderContainertemplate--28684899876945__before_after_comparison_dg6PAy">
           <!-- After Image (Background) -->
           <div class="after-image-template--28684899876945__before_after_comparison_dg6PAy">
-            
+            {%- if section.settings.after_image != blank -%}
+              <img src="{{ section.settings.after_image | image_url: width: 800 }}" alt="After" loading="lazy" width="" height="">
+            {%- else -%}
               <img src="{{ 'comparison-after.jpg' | asset_url }}" alt="After" loading="lazy" width="" height="">
-            
+            {%- endif -%}
             <div class="image-label-template--28684899876945__before_after_comparison_dg6PAy label-after-template--28684899876945__before_after_comparison_dg6PAy">After</div>
           </div>
           
           <!-- Before Image (Clipped) -->
           <div class="before-image-template--28684899876945__before_after_comparison_dg6PAy" id="beforeImagetemplate--28684899876945__before_after_comparison_dg6PAy" style="clip-path: inset(0px 50% 0px 0px);">
-            
+            {%- if section.settings.before_image != blank -%}
+              <img src="{{ section.settings.before_image | image_url: width: 800 }}" alt="Before" loading="lazy" width="" height="">
+            {%- else -%}
               <img src="{{ 'comparison-before.jpg' | asset_url }}" alt="Before" loading="lazy" width="" height="">
-            
+            {%- endif -%}
             <div class="image-label-template--28684899876945__before_after_comparison_dg6PAy label-before-template--28684899876945__before_after_comparison_dg6PAy">Before</div>
           </div>
           
@@ -60,21 +54,14 @@
           </div>
         </div>
         
-        
-          <div class="slider-instructions-template--28684899876945__before_after_comparison_dg6PAy">
-            جرّي السهم باش تشوفي الفرق
-          </div>
+        <div class="slider-instructions-template--28684899876945__before_after_comparison_dg6PAy">
+          جرّي السهم باش تشوفي الفرق
+        </div>
         
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-
 
 {% schema %}
 {
@@ -85,6 +72,28 @@
       "id": "heading",
       "label": "Section Heading",
       "default": "Before After Comparison"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "العنوان الرئيسي",
+      "default": "غيري تجربة الرضاعة الطبيعية مع Tighli اللاسلكية"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "الوصف",
+      "default": "احصلي على راحة كاملة من أول استعمال. مضخة Tighli الذكية كتسهل عليك الرضاعة الطبيعية وكتوفر ليك الوقت باش ترتاحي وتعتني بطفلك بلا عذاب وبلا آلام."
+    },
+    {
+      "type": "image_picker",
+      "id": "before_image",
+      "label": "صورة Before (قبل)"
+    },
+    {
+      "type": "image_picker",
+      "id": "after_image",
+      "label": "صورة After (بعد)"
     }
   ],
   "presets": [
