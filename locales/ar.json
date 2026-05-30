@@ -1,0 +1,169 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "تخطي إلى المحتوى الرئيسي",
+      "close": "إغلاق",
+      "loading": "جاري التحميل...",
+      "pause_slideshow": "إيقاف عرض الشرائح",
+      "play_slideshow": "تشغيل عرض الشرائح",
+      "previous": "السابق",
+      "next": "التالي",
+      "pause": "إيقاف مؤقت",
+      "play": "تشغيل"
+    },
+    "cart": {
+      "view": "عرض السلة",
+      "item_added": "تمت إضافة المنتج إلى السلة",
+      "items_subtotal": "المجموع الفرعي",
+      "go_to_checkout": "إتمام الشراء",
+      "total": "المجموع",
+      "empty": "سلة التسوق فارغة",
+      "title": "السلة",
+      "note": "ملاحظة خاصة للطلب"
+    },
+    "search": {
+      "search": "بحث",
+      "search_our_store": "ابحث في متجرنا",
+      "no_results": "لا توجد نتائج لـ \"{{ terms }}\"",
+      "placeholder": "بحث",
+      "reset": "مسح",
+      "title": "نتائج البحث"
+    },
+    "social": {
+      "links": {
+        "facebook": "فيسبوك",
+        "twitter": "تويتر",
+        "instagram": "إنستغرام",
+        "pinterest": "بينتيريست",
+        "snapchat": "سناب شات",
+        "tiktok": "تيك توك",
+        "tumblr": "تمبلر",
+        "youtube": "يوتيوب",
+        "vimeo": "فيميو"
+      }
+    },
+    "pagination": {
+      "label": "الصفحات",
+      "next": "الصفحة التالية",
+      "previous": "الصفحة السابقة"
+    }
+  },
+  "sections": {
+    "header": {
+      "name": "الرأسية",
+      "menu": "القائمة",
+      "search": "بحث",
+      "cart": "السلة",
+      "cart_count": {
+        "one": "{{ count }} منتج",
+        "other": "{{ count }} منتجات"
+      }
+    },
+    "announcement_bar": {
+      "name": "شريط الإعلانات"
+    },
+    "footer": {
+      "name": "تذييل الصفحة"
+    }
+  },
+  "templates": {
+    "404": {
+      "title": "الصفحة غير موجودة",
+      "subtext": "الصفحة التي تبحث عنها غير موجودة.",
+      "link": "متابعة التسوق"
+    },
+    "cart": {
+      "cart": "السلة",
+      "continue_shopping": "مواصلة التسوق",
+      "empty": "سلة التسوق فارغة حالياً.",
+      "title": "سلتك",
+      "total": "المجموع المقدر"
+    },
+    "password": {
+      "title": "قريباً",
+      "opening_soon": "افتتاح قريباً",
+      "form": {
+        "title": "أدخل كلمة المرور للوصول إلى المتجر",
+        "placeholder": "كلمة المرور",
+        "submit": "دخول",
+        "wrong_password": "كلمة المرور غير صحيحة، يرجى المحاولة مجدداً."
+      }
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "إضافة إلى السلة",
+      "sold_out": "نفد من المخزن",
+      "unavailable": "غير متوفر",
+      "regular_price": "السعر العادي",
+      "sale_price": "سعر التخفيض",
+      "on_sale": "تخفيض",
+      "quantity": {
+        "label": "الكمية",
+        "increase": "زيادة الكمية",
+        "decrease": "تقليل الكمية"
+      }
+    }
+  },
+  "customer": {
+    "account_fallback": "حسابي",
+    "log_in": "تسجيل الدخول",
+    "login": {
+      "title": "تسجيل الدخول",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "submit": "دخول",
+      "forgot_password": "نسيت كلمة المرور؟",
+      "new_customer": "عميل جديد؟",
+      "create_account": "إنشاء حساب"
+    },
+    "register": {
+      "title": "إنشاء حساب",
+      "first_name": "الاسم الأول",
+      "last_name": "الاسم الأخير",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "submit": "إنشاء الحساب"
+    },
+    "orders": {
+      "title": "سجل الطلبات",
+      "none": "لم تقم بأي طلبات حتى الآن."
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "تخطي إلى المحتوى",
+    "close": "إغلاق",
+    "loading": "جاري التحميل",
+    "previous": "السابق",
+    "next": "التالي",
+    "pause": "إيقاف مؤقت",
+    "play": "تشغيل",
+    "in_stock": "متوفر",
+    "out_of_stock": "نفد من المخزن"
+  },
+  "localization": {
+    "country_label": "الدولة / المنطقة",
+    "language_label": "اللغة",
+    "update_country": "تحديث",
+    "update_language": "تحديث"
+  },
+  "collection": {
+    "title": "المجموعة",
+    "facets": {
+      "filters_label": "تصفية",
+      "sort_label": "ترتيب حسب",
+      "sort_options": {
+        "manual": "مميز",
+        "best-selling": "الأكثر مبيعاً",
+        "title-ascending": "أبجدياً: أ-ي",
+        "title-descending": "أبجدياً: ي-أ",
+        "price-ascending": "السعر: من الأقل إلى الأعلى",
+        "price-descending": "السعر: من الأعلى إلى الأقل",
+        "created-ascending": "التاريخ: من الأقدم",
+        "created-descending": "التاريخ: من الأحدث"
+      },
+      "clear_all": "مسح الكل",
+      "apply": "تطبيق"
+    }
+  }
+}

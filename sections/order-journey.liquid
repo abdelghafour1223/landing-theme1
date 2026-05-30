@@ -1,0 +1,118 @@
+<div id="OrderJourney-{{ section.id }}" class="order-journey-section" style="background-color: {{ section.settings.bg_color | default: '#f9f9f9' }}; color: {{ section.settings.text_color | default: '#121212' }}; padding: 50px 15px; direction: rtl; font-family: var(--font-body-family-override), sans-serif;">
+  <div class="journey-container" style="max-width: 600px; margin: 0 auto;">
+    {%- if section.settings.title != blank -%}
+      <h2 class="journey-title" style="text-align: center; font-size: 26px; font-weight: 900; margin-top: 0; margin-bottom: 35px; color: {{ section.settings.text_color | default: '#121212' }}; letter-spacing: -0.5px;">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    <div class="timeline-steps" style="display: flex; flex-direction: column; gap: 24px; position: relative;">
+      <!-- Connective vertical line -->
+      <div class="timeline-line" style="position: absolute; right: 21px; top: 22px; bottom: 22px; width: 3px; background-color: #eee; z-index: 1;"></div>
+      
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'step_item' -%}
+          <div class="timeline-step-item" style="display: flex; gap: 20px; position: relative; z-index: 2;" {{ block.shopify_attributes }}>
+            <!-- Step Counter Bubble -->
+            <div class="step-icon-wrapper" style="width: 44px; height: 44px; border-radius: 50%; background-color: {{ section.settings.accent_color | default: '#cb6387' }}; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+              {{ forloop.index }}
+            </div>
+            <!-- Step Text Card -->
+            <div class="step-text-content" style="background: #fff; padding: 18px 22px; border-radius: 14px; border: 1px solid #eee; flex-grow: 1; box-shadow: 0 4px 16px rgba(0,0,0,0.02); text-align: right;">
+              <h3 style="font-size: 18px; font-weight: 800; margin: 0 0 6px 0; color: #121212;">{{ block.settings.title }}</h3>
+              <p style="font-size: 14.5px; color: #555; margin: 0; line-height: 1.5;">{{ block.settings.content }}</p>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Visual Order Journey",
+  "settings": [
+    {
+      "type": "header",
+      "content": "🚚 إعدادات قسم رحلة الشحن والتوصيل"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "لون خلفية القسم",
+      "info": "💡 اختر لوناً هادئاً وخفيفاً جداً لخلفية القسم (ينصح باستعمال ألوان رمادية أو بيضاء فاتحة للفصل بين أقسام الصفحة بجمالية).",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "لون نصوص العناوين الرئيسية",
+      "info": "💡 لون الخط المستخدم لعناوين القسم والخطوات لضمان القراءة السهلة والمريحة.",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "لون تمييز دوائر الخطوات",
+      "info": "💡 هاد اللون كيتحكم في الدوائر المرقمة والخط الرابط الذي يمثل مسار حركة الطرد من متجرك إلى باب دار الزبون.",
+      "default": "#cb6387"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "العنوان الرئيسي للقسم",
+      "info": "💡 العنوان الأبرز اللي ك يظهر فوق مسار الخطوات ليطمن المشتري المغربي (مثال بالدارجة: رحلة طلبك (كيفاش كتوصلك الأمانة؟) 🚚).",
+      "default": "رحلة طلبك (كيفاش كتوصلك الأمانة؟) 🚚"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step_item",
+      "name": "خطوة في المسار (Journey Step)",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "عنوان الخطوة الشحنية",
+          "info": "💡 اسم المرحلة (مثال: تأكيد الطلب الهاتفي 📞، تغليف وتوصيل سريع فابور 🚚، تفحص الأمانة عاد خلص 🤝).",
+          "default": "تأكيد الطلب"
+        },
+        {
+          "type": "text",
+          "id": "content",
+          "label": "تفاصيل وشرح الخطوة للزبون",
+          "info": "💡 شرح مبسط ومقنع ك يفسر للزبونة بوضوح شنو ك يطرا في هاد الخطوة لبناء أمان وثقة مطلقة (مثال: ك نتصلو بيك فالهاتف فنفس النهار باش نأكدو معاك العنوان والقياس بكل مصداقية).",
+          "default": "غادي نتصلوا بيك في الهاتف في أقل من 24 ساعة باش نأكدو معاك تفاصيل العنوان والكمية المطلوبة."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Visual Order Journey",
+      "blocks": [
+        {
+          "type": "step_item",
+          "settings": {
+            "title": "تأكيد الطلب الهاتفي 📞",
+            "content": "مباشرة مورا ما كتعمر الاستمارة، كيتصل بيك فريق الدعم ديالنا باش يأكد معاك العنوان ومقاسات الطلب بكل أمانة وشفافية."
+          }
+        },
+        {
+          "type": "step_item",
+          "settings": {
+            "title": "تغليف وتوصيل سريع فابور 🚚",
+            "content": "كنغلفو المنتج ديالك بعناية وكنسلموه للموزع الخاص بنا لي كيجيبو ليك حتى لباب الدار في ظرف 24 إلى 48 ساعة والتوصيل ديما فابور!"
+          }
+        },
+        {
+          "type": "step_item",
+          "settings": {
+            "title": "تفحص الأمانة وخلص 🤝",
+            "content": "ملي يوصلك الموزع، تفحص المضخة وشوف الجودة ديالها مزيان عاد خلص. الدفع ديما عند الاستلام والتأكد 100%!"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

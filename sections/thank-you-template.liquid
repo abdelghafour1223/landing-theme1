@@ -1,0 +1,346 @@
+<!-- Confetti Canvas -->
+<canvas id="confettiCanvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999;"></canvas>
+
+<div class="thank-you-page" style="background-color: {{ section.settings.bg_color | default: '#f9f9f9' }}; padding: 60px 15px; direction: rtl; font-family: var(--font-body-family-override), sans-serif;">
+  <div class="thank-you-container" style="max-width: 600px; margin: 0 auto; background: #fff; padding: 40px 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eee; text-align: center;">
+    
+    <!-- Success Icon -->
+    <div class="success-icon-wrapper" style="margin-bottom: 24px; position: relative; display: inline-block;">
+      <div class="success-icon" style="width: 80px; height: 80px; border-radius: 50%; background-color: #4CAF50; display: flex; align-items: center; justify-content: center; margin: 0 auto; box-shadow: 0 6px 20px rgba(76, 175, 80, 0.3);">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" fill="white"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Main Message -->
+    <h1 class="thank-you-title" style="font-size: 28px; font-weight: 900; color: #121212; margin: 0 0 8px 0;">{{ section.settings.heading | default: "شكراً على طلبك! 🎉" }}</h1>
+    <p class="thank-you-subtitle" style="font-size: 16px; color: #666; margin: 0 0 32px 0;">{{ section.settings.sub_heading | default: "طلبك تسجل بنجاح وغادي يتصلو بيك قريب" }}</p>
+
+    <!-- WhatsApp Fast Confirmation (100% Genuine COD conversion helper) -->
+    {%- if section.settings.whatsapp_enabled -%}
+      <div class="whatsapp-confirmation-card" style="background: linear-gradient(135deg, #e8f7ee, #d8f3e2); border: 2px dashed #25D366; padding: 24px 20px; border-radius: 16px; margin-bottom: 32px; text-align: center;">
+        <h3 style="font-size: 18px; font-weight: 800; color: #1e7e34; margin: 0 0 6px 0;">أكدي طلبك دابا فالتساب! 🟢</h3>
+        <p style="font-size: 14px; color: #3c7a4b; margin: 0 0 16px 0; line-height: 1.4;">باش نجهزو ونصيفطو ليك طلبك بأقصى سرعة، اضغطي على الزر للتأكيد السريع عبر الواتساب</p>
+        <a id="ConfirmWhatsAppBtn" 
+           href="https://wa.me/{{ section.settings.whatsapp_number | replace: '+', '' | replace: ' ', '' }}?text={{ section.settings.whatsapp_message | url_encode }}" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; background-color: #25D366; color: #fff; padding: 12px 28px; border-radius: 30px; font-weight: 700; font-size: 16px; text-decoration: none; box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4); transition: transform 0.2s;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M19.001 4.908A9.817 9.817 0 0 0 11.992 2C6.534 2 2.085 6.448 2.08 11.91c0 1.748.458 3.45 1.321 4.956L2 22l5.255-1.377a9.816 9.816 0 0 0 4.73 1.206h.005c5.46 0 9.908-4.448 9.913-9.913a9.807 9.807 0 0 0-2.899-7.008zM11.992 20.158a8.16 8.16 0 0 1-4.168-1.14l-.299-.178-3.1 1.01L3.435 18a8.18 8.18 0 0 1-1.277-4.3c0-4.5 3.666-8.163 8.183-8.163 2.185 0 4.24.85 5.787 2.399a8.138 8.138 0 0 1 2.394 5.794c-.005 4.512-3.673 8.176-8.175 8.176zm4.49-6.14c-.246-.123-1.46-.72-1.685-.803-.225-.082-.39-.123-.553.123-.163.246-.635.803-.78.966-.143.163-.288.184-.533.061a6.712 6.712 0 0 1-1.977-1.218 7.42 7.42 0 0 1-1.368-1.705c-.144-.245-.015-.378.108-.5a15.42 15.42 0 0 0 .54-.648c.06-.098.03-.18-.016-.263-.045-.081-.39-.94-.533-1.286-.14-.337-.282-.292-.39-.297l-.33-.005c-.225 0-.59.084-.9.42-.31.336-1.18 1.15-1.18 2.8s1.2 3.24 1.365 3.47c.164.228 2.36 3.6 5.717 5.05 3.355 1.448 3.355.966 3.97.905.613-.061 1.685-.688 1.92-1.353.237-.665.237-1.233.165-1.353-.07-.12-.245-.204-.49-.327z" fill="white"/></svg>
+          تأكيد الطلب عبر واتساب
+        </a>
+      </div>
+    {%- endif -%}
+
+    <!-- Order Details Card -->
+    <div class="order-details-card" style="border: 1px solid #eee; border-radius: 16px; padding: 24px; text-align: right; margin-bottom: 32px; box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
+      <div class="order-details-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 16px;">
+        <h2 style="font-size: 18px; font-weight: 800; color: #121212; margin: 0;">تفاصيل الطلب</h2>
+        <span class="order-id" id="orderId" style="background-color: #f0f0f0; color: #333; padding: 4px 12px; border-radius: 20px; font-weight: 700; font-size: 13px;">...</span>
+      </div>
+
+      <div class="order-details-body" style="display: flex; flex-direction: column; gap: 10px;">
+        <div class="detail-row" style="display: flex; justify-content: space-between; font-size: 14px;">
+          <span class="detail-label" style="color: #666;">المنتج</span>
+          <span class="detail-value" id="orderProduct" style="color: #121212; font-weight: 700;">{{ product.title | default: "مضخة الحليب اللاسلكية Tighli" }}</span>
+        </div>
+        <div class="detail-row" style="display: flex; justify-content: space-between; font-size: 14px;">
+          <span class="detail-label" style="color: #666;">الكمية</span>
+          <span class="detail-value" id="orderQty" style="color: #121212; font-weight: 700;">...</span>
+        </div>
+        <div class="detail-row" style="display: flex; justify-content: space-between; font-size: 14px;">
+          <span class="detail-label" style="color: #666;">المبلغ الإجمالي</span>
+          <span class="detail-value detail-price" id="orderTotal" style="color: {{ section.settings.accent_color | default: '#cb6387' }}; font-weight: 800; font-size: 16px;">... درهم</span>
+        </div>
+        <div class="detail-divider" style="height: 1px; background-color: #eee; margin: 8px 0;"></div>
+        <div class="detail-row" style="display: flex; justify-content: space-between; font-size: 14px;">
+          <span class="detail-label" style="color: #666;">الإسم</span>
+          <span class="detail-value" id="orderName" style="color: #121212; font-weight: 700;">...</span>
+        </div>
+        <div class="detail-row" style="display: flex; justify-content: space-between; font-size: 14px;">
+          <span class="detail-label" style="color: #666;">العنوان</span>
+          <span class="detail-value" id="orderAddress" style="color: #121212; font-weight: 600;">...</span>
+        </div>
+        <div class="detail-row" style="display: flex; justify-content: space-between; font-size: 14px;">
+          <span class="detail-label" style="color: #666;">رقم الهاتف</span>
+          <span class="detail-value" id="orderPhone" dir="ltr" style="color: #121212; font-weight: 700;">...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- What's Next Timeline -->
+    <div class="whats-next" style="text-align: right; border-top: 1px solid #eee; padding-top: 32px;">
+      <h3 style="font-size: 18px; font-weight: 800; color: #121212; margin: 0 0 20px 0;">رحلة طلبك (أشنو غادي يوقع دابا؟) 🚚</h3>
+      <div class="steps" style="display: flex; flex-direction: column; gap: 16px;">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'step_item' -%}
+            <div class="step" style="display: flex; gap: 16px; align-items: flex-start;" {{ block.shopify_attributes }}>
+              <div class="step-number" style="width: 32px; height: 32px; border-radius: 50%; background-color: {{ section.settings.accent_color | default: '#cb6387' }}; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; flex-shrink: 0;">
+                {{ forloop.index }}
+              </div>
+              <div class="step-content">
+                <h4 style="font-size: 15px; font-weight: 800; margin: 0 0 4px 0; color: #121212;">{{ block.settings.title }}</h4>
+                <p style="font-size: 13.5px; color: #666; margin: 0; line-height: 1.4;">{{ block.settings.content }}</p>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <!-- Go Back Home -->
+    <div style="margin-top: 40px; border-top: 1px solid #eee; padding-top: 24px;">
+      <a href="{{ routes.all_products_collection_url | default: '/' }}" style="color: {{ section.settings.accent_color | default: '#cb6387' }}; text-decoration: none; font-weight: 700; font-size: 15px;">⬅️ العودة للصفحة الرئيسية للمتجر</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Try to load order details from localStorage
+  var orderDataStr = localStorage.getItem('tighli_order');
+  
+  // Also try URL parameters as a fallback (helpful for COD apps redirects)
+  var urlParams = new URLSearchParams(window.location.search);
+  var orderData = {};
+
+  if (orderDataStr) {
+    orderData = JSON.parse(orderDataStr);
+  } else if (urlParams.has('name') || urlParams.has('phone')) {
+    // Fallback from query params
+    orderData = {
+      orderId: urlParams.get('order_id') || ('TG-' + Math.floor(100000 + Math.random() * 900000)),
+      fullName: urlParams.get('name') || '...',
+      phoneNumber: urlParams.get('phone') || '...',
+      fullAddress: urlParams.get('address') || '...',
+      qty: urlParams.get('qty') || '2',
+      total: urlParams.get('total') || '329'
+    };
+  } else {
+    // Minimal placeholder so page doesn't break
+    orderData = {
+      orderId: 'TG-' + Math.floor(100000 + Math.random() * 900000),
+      fullName: 'زائر محترم',
+      phoneNumber: '...',
+      fullAddress: 'العنوان المدخل',
+      qty: '2',
+      total: '329'
+    };
+  }
+
+  // Populate UI
+  var qtyLabels = { 1: '1 قطعة', 2: '2 قطع', 3: '3 قطع' };
+  
+  var idEl = document.getElementById('orderId');
+  var qtyEl = document.getElementById('orderQty');
+  var totalEl = document.getElementById('orderTotal');
+  var nameEl = document.getElementById('orderName');
+  var addrEl = document.getElementById('orderAddress');
+  var phoneEl = document.getElementById('orderPhone');
+
+  if (idEl) idEl.textContent = orderData.orderId;
+  if (qtyEl) qtyEl.textContent = qtyLabels[orderData.qty] || (orderData.qty + ' قطع');
+  if (totalEl) totalEl.textContent = orderData.total + ' درهم';
+  if (nameEl) nameEl.textContent = orderData.fullName;
+  if (addrEl) addrEl.textContent = orderData.fullAddress;
+  if (phoneEl) phoneEl.textContent = orderData.phoneNumber;
+
+  // Custom pre-filled WhatsApp message with actual Order Number
+  var waBtn = document.getElementById('ConfirmWhatsAppBtn');
+  if (waBtn) {
+    var originalHref = waBtn.getAttribute('href');
+    var extraText = ' ' + orderData.orderId + ' - الإسم: ' + orderData.fullName + ' - المنتج: ' + '{{ product.title | default: "مضخة الحليب اللاسلكية" }}';
+    waBtn.setAttribute('href', originalHref + encodeURIComponent(extraText));
+  }
+
+  // Clear order from storage so refresh doesn't trigger loop
+  localStorage.removeItem('tighli_order');
+
+  // Trigger Confetti
+  launchConfetti();
+});
+
+// Canvas Confetti
+function launchConfetti() {
+  var canvas = document.getElementById('confettiCanvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  var particles = [];
+  var colors = ['#ef4a65', '#cb6387', '#4CAF50', '#FFD700', '#FF6B6B', '#f06292', '#81C784'];
+
+  for (var i = 0; i < 150; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height - canvas.height,
+      w: Math.random() * 10 + 5,
+      h: Math.random() * 6 + 3,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      speedX: (Math.random() - 0.5) * 4,
+      speedY: Math.random() * 3 + 2,
+      rotation: Math.random() * 360,
+      rotationSpeed: (Math.random() - 0.5) * 10,
+      opacity: 1
+    });
+  }
+
+  var startTime = Date.now();
+  var duration = 4000;
+
+  function animate() {
+    var elapsed = Date.now() - startTime;
+    if (elapsed > duration) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      return;
+    }
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    var fadeStart = duration * 0.6;
+
+    particles.forEach(function (p) {
+      p.x += p.speedX;
+      p.y += p.speedY;
+      p.rotation += p.rotationSpeed;
+
+      if (elapsed > fadeStart) {
+        p.opacity = 1 - ((elapsed - fadeStart) / (duration - fadeStart));
+      }
+
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate((p.rotation * Math.PI) / 180);
+      ctx.globalAlpha = Math.max(0, p.opacity);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx.restore();
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+  window.addEventListener('resize', function () {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+}
+</script>
+
+{% schema %}
+{
+  "name": "Thank You Template",
+  "settings": [
+    {
+      "type": "header",
+      "content": "🎉 إعدادات صفحة الشكر التفاعلية (Thank You Page)"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "لون خلفية صفحة الشكر",
+      "info": "💡 اختر لوناً فاتحاً وناعماً لخلفية صفحة الشكر لتعطي إحساساً بالأمان والارتياح للزبون.",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "لون تمييز الفواتير والخطوات",
+      "info": "💡 هاد اللون كيتحكم في لون رقم الطلب، تفاصيل السعر الإجمالي، وأيقونة الواتساب الخضراء.",
+      "default": "#cb6387"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "العنوان الرئيسي للشكر والتهنئة",
+      "info": "💡 العنوان الكبير البارز في أعلى الصفحة لشكر المشتري (مثال بالدارجة: شكراً بزاف على ثقتك فينا! 🎉).",
+      "default": "شكراً على طلبك! 🎉"
+    },
+    {
+      "type": "text",
+      "id": "sub_heading",
+      "label": "العنوان الفرعي الإرشادي",
+      "info": "💡 نص فرعي يوضح للزبونة الخطوة الموالية مباشرة لإراحتها نفسياً (مثال بالدارجة: طلبك تسجل بنجاح وغادي يتصل بيك الموظف ديالنا فالهاتف قريب باش يأكد معاك).",
+      "default": "طلبك تسجل بنجاح وغادي يتصلو بيك قريب"
+    },
+    {
+      "type": "header",
+      "content": "🟢 تأكيد الطلب السريع عبر واتساب (WhatsApp Confirmation)"
+    },
+    {
+      "type": "checkbox",
+      "id": "whatsapp_enabled",
+      "label": "تفعيل زر واتساب للتأكيد السريع",
+      "info": "💡 🚀 ميزة خارقة للمبتدئين: ملي ك تفعل هاد الزر، ك تظهر بطاقة للزبون تطلب منه تأكيد الطلب فوراً عبر واتساب بضغطة واحدة. هاد الميزة ك تصفي الطلبيات الوهمية وتسهل عمل الموزعين بشكل لا يصدق!",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_number",
+      "label": "رقم واتساب الدعم الخاص بمتجرك",
+      "info": "⚠️ اكتب رقم الهاتف بالرمز الدولي المغربي بدون علامة زائد (+) وبدون أصفار إضافية (مثال: اكتب 212600000000). كتابته بشكل خاطئ ك يمنع إرسال الرسالة!",
+      "default": "212600000000"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_message",
+      "label": "الرسالة الافتراضية للتأكيد السريع",
+      "info": "💡 الرسالة الجاهزة اللي ك يرسلها الزبون ليك في واتساب (النظام ك يدمج رقم طلبيته وتكلفتها تلقائياً مع الرسالة بالكامل!).",
+      "default": "السلام عليكم، قمت بالطلب في الموقع وبغيت نأكد الطلب ديالي رقم: "
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step_item",
+      "name": "خطوة توضيحية (Follow-up Step)",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "عنوان الخطوة القادمة",
+          "info": "💡 اسم المرحلة التي سيمر بها الطلب الآن (مثال بالدارجة: التجهيز والشحن فابور 🚚، تفحص طردك والدفع عاد خلص 🤝).",
+          "default": "تأكيد الطلب"
+        },
+        {
+          "type": "text",
+          "id": "content",
+          "label": "شرح وتفاصيل الخطوة التوضيحية",
+          "info": "💡 شرح مبسط ومريح يطمئن الزبون ويحثه على عدم التراجع أو تغيير رأيه بخصوص الطلبية.",
+          "default": "غادي نتواصلو معاك عبر الهاتف مباشرة بعد تسجيل الطلب باش نأكدو معاك العنوان والوقت المناسب لك."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Thank You Template",
+      "blocks": [
+        {
+          "type": "step_item",
+          "settings": {
+            "title": "تأكيد الطلب الهاتفي",
+            "content": "غادي نتصلوا بيك في الهاتف في أقل من 24 ساعة باش نأكدو معاك تفاصيل العنوان والكمية المطلوبة."
+          }
+        },
+        {
+          "type": "step_item",
+          "settings": {
+            "title": "التجهيز والشحن فابور",
+            "content": "غادي نسلموا الطلبية ديالك للموزع الخاص بنا باش يوصلها ليك حتى لباب دارك فابور وبلا ما تخلصي والو على الشحن."
+          }
+        },
+        {
+          "type": "step_item",
+          "settings": {
+            "title": "تفحص طردك والدفع",
+            "content": "ملي يوصلك الموزع، تفحصي المضخة وشوفي الجودة ديالها مزيان عاد خلصي. الدفع عند الاستلام 100%!"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

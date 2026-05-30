@@ -1,0 +1,20 @@
+{
+  "name": "Thank You Page",
+  "sections": {
+    "main": {
+      "type": "thank-you-template",
+      "settings": {
+        "bg_color": "#f9f9f9",
+        "accent_color": "#cb6387",
+        "heading": "شكراً على طلبك! 🎉",
+        "sub_heading": "طلبك تسجل بنجاح وغادي يتصلو بيك قريب",
+        "whatsapp_enabled": true,
+        "whatsapp_number": "+212600000000",
+        "whatsapp_message": "السلام عليكم، قمت بالطلب في الموقع وبغيت نأكد الطلب ديالي رقم: "
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

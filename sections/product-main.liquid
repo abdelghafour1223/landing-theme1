@@ -1,0 +1,1600 @@
+
+<style>
+  .order-submit-btn,
+  .order-submit-btn:hover,
+  .order-submit-btn:focus,
+  .order-submit-btn .btn-text,
+  #ProductSubmitButton-template--28684899876945__main,
+  #sticky-order-btn,
+  #sticky-order-btn:hover {
+    background-color: {{ section.settings.button_bg_color }} !important;
+    background-image: none !important;
+    color: {{ section.settings.button_text_color }} !important;
+  }
+</style>
+
+<link href="{{ 'shop-product-details.css' | asset_url }}" rel="stylesheet" type="text/css" media="all">
+<link href="{{ 'variant-selector.css' | asset_url }}" rel="stylesheet" type="text/css" media="all">
+
+
+<div class="shop-product-section" data-show-mobile-arrows="false">
+  <div class="shop-product-inner-container">
+    
+      <div class="shop-product-layout">
+        
+          
+<div class="shop-carousel-container" style="max-height: 539px;">
+  <div class="shop-product-carousel product-gallery">
+    <div class="shop-main-image-wrapper">
+      <div class="shop-image-container shop-square-container">
+        {%- if product.media.size > 0 -%}
+          {%- for media in product.media -%}
+            <img class="shop-main-image {% if forloop.first %}active{% endif %}"
+                 src="{{ media | image_url: width: 600, height: 600 }}"
+                 srcset="{{ media | image_url: width: 600, height: 600 }} 1x, {{ media | image_url: width: 1200, height: 1200 }} 2x"
+                 alt="{{ media.alt | default: product.title | escape }}"
+                 loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                 width="600" height="600"
+                 data-src="{{ media | image_url: width: 600, height: 600 }}"
+                 data-media-id="{{ media.id }}"
+                 {% if forloop.first %}fetchpriority="high"{% endif %}>
+          {%- endfor -%}
+        {%- else -%}
+          <img class="shop-main-image active" src="{{ 'product-main.jpg' | asset_url }}" loading="eager" width="600" height="600" fetchpriority="high">
+        {%- endif -%}
+      </div>
+    </div>
+    <!-- Mobile navigation arrows (overlaid on image) -->
+        
+        
+
+        <!-- Desktop navigation arrows (overlaid on image) -->
+        
+        
+      </div>
+    </div>
+
+    <div class="shop-thumbnails-outer">
+      <div class="shop-thumbnails-wrapper shop-match-image-width">
+        <!-- Mobile arrows at start of thumbnails (when placement is below and thumbnails are visible) -->
+        
+
+        <div class="shop-thumbnails toggle-product-variants mobile-2x2-grid" id="thumbnail-container--1779801902021">
+          
+            <div class="shop-thumbnail active  " data-target="shop-image1" data-index="0" data-media-id="70392114053201">
+              <div class="thumb-square">
+                <img src="{{ 'product-main.jpg' | asset_url }}" alt="{{ product.title }}" loading="lazy" data-media-id="70392114053201" width="" height="">
+              </div>
+            </div>
+          
+            <div class="shop-thumbnail   " data-target="shop-image2" data-index="1" data-media-id="67859243073617">
+              <div class="thumb-square">
+                <img src="{{ 'product-components.jpg' | asset_url }}" alt="{{ product.title }}" loading="lazy" data-media-id="67859243073617" width="" height="">
+              </div>
+            </div>
+          
+            <div class="shop-thumbnail   " data-target="shop-image3" data-index="2" data-media-id="67481776422993">
+              <div class="thumb-square">
+                <img src="{{ 'review-1-nursery.jpg' | asset_url }}" alt="{{ product.title }}" loading="lazy" data-media-id="67481776422993" width="" height="">
+              </div>
+            </div>
+          
+            <div class="shop-thumbnail   " data-target="shop-image4" data-index="3" data-media-id="67481780846673">
+              <div class="thumb-square">
+                <img src="{{ 'review-2-handheld.jpg' | asset_url }}" alt="{{ product.title }}" loading="lazy" data-media-id="67481780846673" width="" height="">
+              </div>
+            </div>
+          
+            <div class="shop-thumbnail   " data-target="shop-image5" data-index="4" data-media-id="67859245138001">
+              <div class="thumb-square">
+                <img src="{{ 'product-screen.jpg' | asset_url }}" alt="{{ product.title }}" loading="lazy" data-media-id="67859245138001" width="" height="">
+              </div>
+            </div>
+          
+            <div class="shop-thumbnail   " data-target="shop-image6" data-index="5" data-media-id="67859245596753">
+              <div class="thumb-square">
+                <img src="{{ 'product-lifestyle.jpg' | asset_url }}" alt="{{ product.title }}" loading="lazy" data-media-id="67859245596753" width="" height="">
+              </div>
+            </div>
+          
+            <div class="shop-thumbnail   " data-target="shop-image7" data-index="6" data-media-id="67859246481489">
+              <div class="thumb-square">
+                <img src="{{ 'product-safety.jpg' | asset_url }}" alt="{{ product.title }}" loading="lazy" data-media-id="67859246481489" width="" height="">
+              </div>
+            </div>
+          
+            <div class="shop-thumbnail   " data-target="shop-image8" data-index="7" data-media-id="67859247300689">
+              <div class="thumb-square">
+                <img src="{{ 'why-1-massage.jpg' | asset_url }}" alt="{{ product.title }}" loading="lazy" data-media-id="67859247300689" width="" height="">
+              </div>
+            </div>
+          
+            <div class="shop-thumbnail   " data-target="shop-image9" data-index="8" data-media-id="67859248152657">
+              <div class="thumb-square">
+                <img src="{{ 'why-2-battery.jpg' | asset_url }}" alt="{{ product.title }}" loading="lazy" data-media-id="67859248152657" width="" height="">
+              </div>
+            </div>
+          
+            <div class="shop-thumbnail   " data-target="shop-image10" data-index="9" data-media-id="67859248382033">
+              <div class="thumb-square">
+                <img src="{{ 'why-3-silent.jpg' | asset_url }}" alt="{{ product.title }}" loading="lazy" data-media-id="67859248382033" width="" height="">
+              </div>
+            </div>
+          
+        </div>
+
+        <!-- Mobile arrows at end of thumbnails (when placement is below and thumbnails are visible) -->
+        
+      </div>
+
+      <div class="shop-thumbnail-indicators" id="thumbnail-indicators--1779801902021"></div>
+    </div>
+
+    <!-- Navigation dots (shown when thumbnails are hidden) -->
+    
+
+    <!-- Mobile navigation arrows (below dots when thumbnails are hidden) -->
+    
+    
+
+    <!-- Desktop navigation arrows (below image) - LEGACY FALLBACK -->
+    
+    
+
+    <!-- Desktop navigation arrows (below thumbnails/dots) -->
+    
+    
+
+
+  </div>
+</div>
+
+
+        
+
+        <!-- Product Information Column -->
+        
+          <div class="shop-product-info">
+            
+  
+      <div class="shop-award-badge" id="block-award_badge_nFWJ86">
+        🏆 مضخة الحليب اللاسلكية رقم 1 للأمهات
+      </div>
+
+      
+
+    
+
+  
+      
+      
+
+      <div class="rating-component" id="block-reviews_R4dtXw" style="display: flex; align-items: center; gap: 4px; width: 100%; max-width: 517px; margin-top: 5px; margin-bottom: -5px; font-size: 11.5px; letter-spacing: -0.3px;">
+        <div class="rating-stars" style="display: flex; align-items: center;">
+          <div class="stars" style="display: flex;">
+            
+              <svg class="review-star" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M11.5245 3.46353C11.6741 3.00287 12.3259 3.00287 12.4755 3.46353L14.1{{ product.price | divided_by: 100 }} 8.56434C14.1998 8.77035 14.3918 8.90983 14.6084 8.90983H19.9717C20.4561 8.90983 20.6575 9.52964 20.2656 9.81434L15.9266 12.9668C15.7514 13.0941 15.678 13.3198 15.745 13.5258L17.4023 18.6266C17.552 19.0873 17.0248 19.4704 16.6{{ product.price | divided_by: 100 }} 19.1857L12.2939 16.0332C12.1186 15.9059 11.8814 15.9059 11.7061 16.0332L7.3671 19.1857C6.97524 19.4704 6.448 19.0873 6.59768 18.6266L8.25503 13.5258C8.32197 13.3198 8.24864 13.0941 8.07339 12.9668L3.73438 9.81434C3.34253 9.52964 3.54392 8.90983 4.02828 8.90983H9.39159C9.6082 8.90983 9.80018 8.77035 9.86712 8.56434L11.5245 3.46353Z" fill="#121212"></path>
+</svg>
+            
+              <svg class="review-star" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M11.5245 3.46353C11.6741 3.00287 12.3259 3.00287 12.4755 3.46353L14.1{{ product.price | divided_by: 100 }} 8.56434C14.1998 8.77035 14.3918 8.90983 14.6084 8.90983H19.9717C20.4561 8.90983 20.6575 9.52964 20.2656 9.81434L15.9266 12.9668C15.7514 13.0941 15.678 13.3198 15.745 13.5258L17.4023 18.6266C17.552 19.0873 17.0248 19.4704 16.6{{ product.price | divided_by: 100 }} 19.1857L12.2939 16.0332C12.1186 15.9059 11.8814 15.9059 11.7061 16.0332L7.3671 19.1857C6.97524 19.4704 6.448 19.0873 6.59768 18.6266L8.25503 13.5258C8.32197 13.3198 8.24864 13.0941 8.07339 12.9668L3.73438 9.81434C3.34253 9.52964 3.54392 8.90983 4.02828 8.90983H9.39159C9.6082 8.90983 9.80018 8.77035 9.86712 8.56434L11.5245 3.46353Z" fill="#121212"></path>
+</svg>
+            
+              <svg class="review-star" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M11.5245 3.46353C11.6741 3.00287 12.3259 3.00287 12.4755 3.46353L14.1{{ product.price | divided_by: 100 }} 8.56434C14.1998 8.77035 14.3918 8.90983 14.6084 8.90983H19.9717C20.4561 8.90983 20.6575 9.52964 20.2656 9.81434L15.9266 12.9668C15.7514 13.0941 15.678 13.3198 15.745 13.5258L17.4023 18.6266C17.552 19.0873 17.0248 19.4704 16.6{{ product.price | divided_by: 100 }} 19.1857L12.2939 16.0332C12.1186 15.9059 11.8814 15.9059 11.7061 16.0332L7.3671 19.1857C6.97524 19.4704 6.448 19.0873 6.59768 18.6266L8.25503 13.5258C8.32197 13.3198 8.24864 13.0941 8.07339 12.9668L3.73438 9.81434C3.34253 9.52964 3.54392 8.90983 4.02828 8.90983H9.39159C9.6082 8.90983 9.80018 8.77035 9.86712 8.56434L11.5245 3.46353Z" fill="#121212"></path>
+</svg>
+            
+              <svg class="review-star" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M11.5245 3.46353C11.6741 3.00287 12.3259 3.00287 12.4755 3.46353L14.1{{ product.price | divided_by: 100 }} 8.56434C14.1998 8.77035 14.3918 8.90983 14.6084 8.90983H19.9717C20.4561 8.90983 20.6575 9.52964 20.2656 9.81434L15.9266 12.9668C15.7514 13.0941 15.678 13.3198 15.745 13.5258L17.4023 18.6266C17.552 19.0873 17.0248 19.4704 16.6{{ product.price | divided_by: 100 }} 19.1857L12.2939 16.0332C12.1186 15.9059 11.8814 15.9059 11.7061 16.0332L7.3671 19.1857C6.97524 19.4704 6.448 19.0873 6.59768 18.6266L8.25503 13.5258C8.32197 13.3198 8.24864 13.0941 8.07339 12.9668L3.73438 9.81434C3.34253 9.52964 3.54392 8.90983 4.02828 8.90983H9.39159C9.6082 8.90983 9.80018 8.77035 9.86712 8.56434L11.5245 3.46353Z" fill="#121212"></path>
+</svg>
+            
+
+            <span class="review-star-half" style="position: relative; margin-right: -3px;">
+              <svg class="review-star-empty" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M11.5245 3.46353C11.6741 3.00287 12.3259 3.00287 12.4755 3.46353L14.1{{ product.price | divided_by: 100 }} 8.56434C14.1998 8.77035 14.3918 8.90983 14.6084 8.90983H19.9717C20.4561 8.90983 20.6575 9.52964 20.2656 9.81434L15.9266 12.9668C15.7514 13.0941 15.678 13.3198 15.745 13.5258L17.4023 18.6266C17.552 19.0873 17.0248 19.4704 16.6{{ product.price | divided_by: 100 }} 19.1857L12.2939 16.0332C12.1186 15.9059 11.8814 15.9059 11.7061 16.0332L7.3671 19.1857C6.97524 19.4704 6.448 19.0873 6.59768 18.6266L8.25503 13.5258C8.32197 13.3198 8.24864 13.0941 8.07339 12.9668L3.73438 9.81434C3.34253 9.52964 3.54392 8.90983 4.02828 8.90983H9.39159C9.6082 8.90983 9.80018 8.77035 9.86712 8.56434L11.5245 3.46353Z" fill="#121212"></path>
+</svg>
+              <div style="position: absolute; overflow: hidden; width: 50%; top: 0; left: 0;">
+                <svg class="review-star-filled" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: #121212 !important;">
+                  <path d="M11.5245 3.46353C11.6741 3.00287 12.3259 3.00287 12.4755 3.46353L14.1{{ product.price | divided_by: 100 }} 8.56434C14.1998 8.77035 14.3918 8.90983 14.6084 8.90983H19.9717C20.4561 8.90983 20.6575 9.52964 20.2656 9.81434L15.9266 12.9668C15.7514 13.0941 15.678 13.3198 15.745 13.5258L17.4023 18.6266C17.552 19.0873 17.0248 19.4704 16.6{{ product.price | divided_by: 100 }} 19.1857L12.2939 16.0332C12.1186 15.9059 11.8814 15.9059 11.7061 16.0332L7.3671 19.1857C6.97524 19.4704 6.448 19.0873 6.59768 18.6266L8.25503 13.5258C8.32197 13.3198 8.24864 13.0941 8.07339 12.9668L3.73438 9.81434C3.34253 9.52964 3.54392 8.90983 4.02828 8.90983H9.39159C9.6082 8.90983 9.80018 8.77035 9.86712 8.56434L11.5245 3.46353Z" fill="currentColor"></path>
+                </svg>
+              </div>
+            </span>
+          </div>
+        </div>
+
+        <div class="rating-text-content" style="font-size: 15px; font-weight: 500; color: #000000; letter-spacing: -0.3px; line-height: 1.3;">
+          <p>Rated <strong>4.9/5</strong> (بناءً على 25,320 تقييم من أمهات مرضعات)</p>
+        </div>
+
+        <div class="rating-satisfaction" style="color: #ffffff;; margin-bottom: 0px; font-weight: 600 !important; font-size: 15px; background-color: #121212; padding: 0.5px 4px; border-radius: 2.3px;">
+          أمهات مرتاحات
+        </div>
+      </div>
+      
+
+    
+
+  
+      
+      <h1 style="
+            font-size: 33px !important;
+            margin-top: 3px !important;
+            margin-bottom: 0px !important;
+          color: #121212 !important;
+            line-height: 1.1 !important;
+            padding: 2px 0 !important;
+            width: 100% !important;
+            display: block !important;
+        " class="shop-product-title product-title-title" data-font-size="33" data-mobile-font-size="28" data-resize-listener-added="true">
+        
+          {{ product.title }}
+        
+      </h1>
+      <!-- Responsive title sizing is handled by shop-product-details.js -->
+
+    
+
+  
+      <div class="custom-text-block-custom_text_VEHNzL">
+        <div class="custom-text-wrapper">
+          <div class="custom-text-content">
+            
+              <div class="custom-text-main">
+                
+                <div class="custom-text-main-text-content"><p><strong>جبدي الحليب لولدك بكل راحة وبلا عذاب وبلا خيوط.</strong> تصميم لاسلكي مريح كيعطيك حرية حركة كاملة باش تقضي شغالك وترتاحي فكل وقت وبلا ألم.</p></div>
+              </div>
+            
+
+            
+          </div>
+        </div>
+      </div>
+
+      
+
+      
+
+    
+
+  
+      
+<div class="bg-benefits-grid">
+  <div class="bg-benefit-item">
+    <div class="bg-benefit-icon" style="background-color: #cb6387; color: #ffffff; border: 2px solid #ffffff;">
+      
+        <svg width="30" height="30" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M84.27,171.73l-55.09-20.3a7.92,7.92,0,0,1,0-14.86l55.09-20.3,20.3-55.09a7.92,7.92,0,0,1,14.86,0l20.3,55.09,55.09,20.3a7.92,7.92,0,0,1,0,14.86l-55.09,20.3-20.3,55.09a7.92,7.92,0,0,1-14.86,0Z" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></path>
+          <line x1="176" y1="16" x2="176" y2="64" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line>
+          <line x1="224" y1="72" x2="224" y2="104" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line>
+          <line x1="152" y1="40" x2="200" y2="40" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line>
+          <line x1="208" y1="88" x2="240" y2="88" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line>
+        </svg>
+      
+    </div>
+    <div class="bg-benefit-text" style="color: #181b1d; font-size: 15px; font-weight: 600; letter-spacing: -0.3px; line-height: 1.4; font-family: var(--font-body-family-override);">مساج مريح و9 مستويات ديال السحب بلا ألم</div>
+  </div>
+  
+  <div class="bg-benefit-item">
+    <div class="bg-benefit-icon" style="background-color: #cb6387; color: #ffffff; border: 2px solid #ffffff;">
+      
+        <svg width="30" height="30" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="128" cy="128" r="96" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></circle>
+          <polyline points="128 72 128 128 184 128" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></polyline>
+        </svg>
+      
+    </div>
+    <div class="bg-benefit-text" style="color: #181b1d; font-size: 15px; font-weight: 600; letter-spacing: -0.3px; line-height: 1.4; font-family: var(--font-body-family-override);">صامتة تماماً (38 ديسيبل) باش الرضيع ينعس مرتاح</div>
+  </div>
+  
+  <div class="bg-benefit-item">
+    <div class="bg-benefit-icon" style="background-color: #cb6387; color: #ffffff; border: 2px solid #ffffff;">
+      
+        <svg width="30" height="30" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="80" y1="40" x2="80" y2="88" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line>
+          <line x1="56" y1="64" x2="104" y2="64" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line>
+          <line x1="168" y1="184" x2="168" y2="216" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line>
+          <line x1="152" y1="200" x2="184" y2="200" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line>
+          <line x1="144" y1="80" x2="176" y2="112" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line>
+          <line x1="216" y1="128" x2="216" y2="176" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line>
+          <line x1="192" y1="152" x2="240" y2="152" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line>
+          <rect x="21.49" y="105.37" width="213.02" height="45.25" rx="8" transform="translate(-53.02 128) rotate(-45)" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></rect>
+        </svg>
+      
+    </div>
+    <div class="bg-benefit-text" style="color: #181b1d; font-size: 15px; font-weight: 600; letter-spacing: -0.3px; line-height: 1.4; font-family: var(--font-body-family-override);">سهلة فالتنظيف والتركيب (غير 4 د القطع فالتنظيف)</div>
+  </div>
+  
+  <div class="bg-benefit-item">
+    <div class="bg-benefit-icon" style="background-color: #cb6387; color: #ffffff; border: 2px solid #ffffff;">
+      
+        <svg width="30" height="30" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M54.46,201.54c-9.2-9.2-3.1-28.53-7.78-39.85C41.82,150,24,140.5,24,128s17.82-22,22.68-33.69C51.36,83,45.26,63.66,54.46,54.46S83,51.36,94.31,46.68C106.05,41.82,115.5,24,128,24S150,41.82,161.69,46.68c11.32,4.68,30.65-1.42,39.85,7.78s3.1,28.53,7.78,39.85C214.18,106.05,232,115.5,232,128S214.18,150,209.32,161.69c-4.68,11.32,1.42,30.65-7.78,39.85s-28.53,3.1-39.85,7.78C150,214.18,140.5,232,128,232s-22-17.82-33.69-22.68C83,204.64,63.66,210.74,54.46,201.54Z" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></path>
+          <polyline points="88 136 112 160 168 104" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></polyline>
+        </svg>
+      
+    </div>
+    <div class="bg-benefit-text" style="color: #181b1d; font-size: 15px; font-weight: 600; letter-spacing: -0.3px; line-height: 1.4; font-family: var(--font-body-family-override);">نتائج وأرقام مؤكدة</div>
+  </div>
+</div>
+
+ 
+
+    
+
+  
+
+
+      
+<!-- Visual Variant & Color Swatches -->
+{%- if product.has_only_default_variant == false -%}
+  <div class="product-variant-swatches" style="margin: 20px 0 10px; direction: rtl; text-align: right;">
+    {%- for option in product.options_with_values -%}
+      <div class="variant-option-group" style="margin-bottom: 16px;" data-option-index="{{ option.position }}">
+        <label style="font-size: 14px; font-weight: 800; color: #121212; display: block; margin-bottom: 8px;">{{ option.name }}</label>
+        <div class="swatches-container" style="display: flex; gap: 10px; flex-wrap: wrap;">
+          {%- for value in option.values -%}
+            {%- assign is_color = false -%}
+            {%- assign downcase_name = option.name | downcase -%}
+            {%- if downcase_name contains 'color' or downcase_name contains 'لون' -%}
+              {%- assign is_color = true -%}
+            {%- endif -%}
+            
+            <button type="button" 
+                    class="swatch-button {% if option.selected_value == value %}swatch-active{% endif %}" 
+                    data-option-position="{{ option.position }}" 
+                    data-value="{{ value | escape }}"
+                    style="border: 2px solid {% if option.selected_value == value %}{{ section.settings.accent_color | default: '#cb6387' }}{% else %}#e5e5e5{% endif %}; border-radius: 20px; padding: 8px 18px; background: #fff; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px;">
+              {%- if is_color -%}
+                <span class="color-dot" style="width: 14px; height: 14px; border-radius: 50%; background-color: {{ value | escape }}; border: 1px solid #ccc; display: inline-block;"></span>
+              {%- endif -%}
+              {{ value }}
+            </button>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+  
+  <input type="hidden" name="id" id="selectedVariantId" value="{{ product.selected_or_first_available_variant.id }}">
+  
+  <script type="application/json" id="VariantJson-{{ section.id }}">
+    {{ product.variants | json }}
+  </script>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var swatchGroups = document.querySelectorAll('.variant-option-group');
+    var variantJsonEl = document.getElementById('VariantJson-{{ section.id }}');
+    var hiddenVariantInput = document.getElementById('selectedVariantId');
+    var formVariantInput = document.querySelector('form input[name="id"]');
+    
+    if (!variantJsonEl) return;
+    
+    var variants = JSON.parse(variantJsonEl.textContent);
+    
+    swatchGroups.forEach(function(group) {
+      var buttons = group.querySelectorAll('.swatch-button');
+      var position = parseInt(group.dataset.optionIndex);
+      
+      buttons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          buttons.forEach(function(b) {
+            b.style.borderColor = '#e5e5e5';
+            b.classList.remove('swatch-active');
+          });
+          
+          var accentColor = '{{ section.settings.accent_color | default: "#cb6387" }}';
+          btn.style.borderColor = accentColor;
+          btn.classList.add('swatch-active');
+          
+          updateSelectedVariant();
+        });
+      });
+    });
+    
+    function updateSelectedVariant() {
+      var selectedOptions = {};
+      document.querySelectorAll('.variant-option-group').forEach(function(group) {
+        var activeBtn = group.querySelector('.swatch-button.swatch-active');
+        if (activeBtn) {
+          var position = group.dataset.optionIndex;
+          selectedOptions['option' + position] = activeBtn.dataset.value;
+        }
+      });
+      
+      var matchedVariant = variants.find(function(v) {
+        var match = true;
+        for (var key in selectedOptions) {
+          if (v[key] !== selectedOptions[key]) {
+            match = false;
+            break;
+          }
+        }
+        return match;
+      });
+      
+      if (matchedVariant) {
+        if (hiddenVariantInput) hiddenVariantInput.value = matchedVariant.id;
+        if (formVariantInput) formVariantInput.value = matchedVariant.id;
+        
+        var offerText = document.getElementById('modalOfferText');
+        var priceVal = (matchedVariant.price / 100).toFixed(0);
+        
+        var activeCard = document.querySelector('.offer-inline-card--active');
+        if (activeCard && activeCard.dataset.qty === '1') {
+          activeCard.dataset.price = priceVal;
+          var priceTextEl = activeCard.querySelector('div[style*="font-size: 22px"]');
+          if (priceTextEl) priceTextEl.innerHTML = priceVal + ' <small style="font-size: 13px; font-weight: 600;">درهم</small>';
+          
+          if (offerText) {
+            var titleElement = activeCard.querySelector('div[style*="font-size: 16px"]');
+            var title = titleElement ? titleElement.textContent.trim() : '1 قطعة';
+            offerText.textContent = title + ' — ' + priceVal + ' درهم';
+          }
+        }
+        
+        if (matchedVariant.featured_media && matchedVariant.featured_media.id) {
+          var thumb = document.querySelector('.shop-thumbnail[data-media-id="' + matchedVariant.featured_media.id + '"]');
+          if (thumb) thumb.click();
+        }
+      }
+    }
+  });
+  </script>
+{%- endif -%}
+
+<!-- Inline Offer Bundle (Dynamic Block-based Visual Bundle Selector) -->
+<div class="offer-bundle-inline" style="margin: 16px 0 8px;">
+  <div class="offer-bundle-header" style="margin-bottom: 16px;">
+    <p style="font-size: 14px; font-weight: 700; color: #121212; text-align: center; margin: 0 0 4px; border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 10px 0; letter-spacing: 0.5px;">شري كثر — ووفري كثر</p>
+  </div>
+
+  <div class="offer-inline-cards" style="display: flex; flex-direction: column; gap: 10px;">
+    {%- assign bundle_count = 0 -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'bundle_card' -%}
+        {%- assign bundle_count = bundle_count | plus: 1 -%}
+        {%- assign card_image = block.settings.image | default: product.featured_image -%}
+        
+        <div class="offer-inline-card {% if block.settings.is_active %}offer-inline-card--active{% endif %}" 
+             data-qty="{{ block.settings.qty | escape }}" 
+             data-price="{{ block.settings.price | escape }}" 
+             {{ block.shopify_attributes }}
+             style="border: 2px solid {% if block.settings.is_active %}{{ section.settings.accent_color | default: '#cb6387' }}{% else %}#e5e5e5{% endif %}; border-radius: 14px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: all 0.2s; position: relative; background: {% if block.settings.is_active %}linear-gradient(180deg, {{ section.settings.accent_color_light | default: '#fff5f7' }} 0%, #fff 100%){% else %}#fff{% endif %}; {% if block.settings.is_active %}box-shadow: 0 4px 16px rgba(203, 99, 135, 0.12);{% endif %}">
+          
+          {%- if block.settings.badge != blank -%}
+            <div style="position: absolute; top: -10px; left: 14px; background: {{ section.settings.accent_color | default: '#cb6387' }}; color: #fff; font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 20px; letter-spacing: 0.3px;">
+              {{ block.settings.badge }}
+            </div>
+          {%- endif -%}
+
+          <div style="display: flex; align-items: center; gap: 14px;">
+            {%- if card_image != blank -%}
+              <img src="{{ card_image | image_url: width: 110, height: 110 }}" alt="{{ block.settings.title | escape }}" style="width: 55px; height: 55px; border-radius: 10px; object-fit: cover;">
+            {%- else -%}
+              <img src="{{ 'product-main.jpg' | asset_url }}" alt="Default Image" style="width: 55px; height: 55px; border-radius: 10px; object-fit: cover;">
+            {%- endif -%}
+            <div>
+              <div style="font-size: 16px; font-weight: 800; color: #121212;">
+                {{ block.settings.title }}
+                {%- if block.settings.discount_badge != blank -%}
+                  <span style="background: linear-gradient(135deg, #ef4a65, {{ section.settings.accent_color | default: '#cb6387' }}); color: #fff; font-size: 11px; padding: 2px 8px; border-radius: 6px; margin-right: 6px;">{{ block.settings.discount_badge }}</span>
+                {%- endif -%}
+              </div>
+              {%- if block.settings.sub_text != blank -%}
+                <div style="font-size: 12px; color: #888; margin-top: 2px;">{{ block.settings.sub_text }}</div>
+              {%- endif -%}
+            </div>
+          </div>
+
+          <div style="text-align: left;">
+            {%- if block.settings.compare_at_price != blank and block.settings.compare_at_price != "0" -%}
+              <div style="font-size: 14px; color: #aaa; text-decoration: line-through;">{{ block.settings.compare_at_price }} درهم</div>
+            {%- endif -%}
+            <div style="font-size: 22px; font-weight: 900; color: {% if block.settings.is_active %}{{ section.settings.accent_color | default: '#cb6387' }}{% else %}#121212{% endif %};">
+              {{ block.settings.price }} <small style="font-size: 13px; font-weight: 600;">درهم</small>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+    
+    {%- if bundle_count == 0 -%}
+      <p style="text-align: center; color: #888; padding: 10px;">الرجاء إضافة عروض (Bundle Blocks) من إعدادات القالب.</p>
+    {%- endif -%}
+  </div>
+
+  <!-- Trust line -->
+  <div style="display: flex; justify-content: center; gap: 20px; margin-top: 12px; flex-wrap: wrap;">
+    <span style="font-size: 12px; color: #666; display: flex; align-items: center; gap: 4px;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" fill="#4CAF50"/><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" fill="white"/></svg>
+      الدفع عند الإستلام
+    </span>
+    <span style="font-size: 12px; color: #666; display: flex; align-items: center; gap: 4px;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" fill="#4CAF50"/><path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" fill="#4CAF50"/></svg>
+      توصيل 24-48 ساعة
+    </span>
+    <span style="font-size: 12px; color: #666; display: flex; align-items: center; gap: 4px;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" fill="#4CAF50"/><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" fill="white"/></svg>
+      ضمان 60 يوم
+    </span>
+  </div>
+</div>
+
+<!-- Order Form Modal -->
+<div class="order-modal-overlay" id="orderModal">
+  <div class="order-modal">
+    <button class="order-modal-close" id="orderModalClose">&times;</button>
+    <div class="order-modal-header">
+      <h3>{{ section.settings.form_heading | default: "أكملي الطلب ديالك" }}</h3>
+      <p class="order-modal-offer" id="modalOfferText">2 قطع — {{ product.price | money }}</p>
+      <p class="order-modal-payment">💳 الدفع عند الإستلام</p>
+    </div>
+    <form class="order-form" id="orderForm" novalidate>
+      <input type="hidden" id="orderQty" name="qty">
+      <input type="hidden" id="orderPrice" name="price">
+
+      <div class="form-group">
+        <label for="fullName">{{ section.settings.name_label | default: "الاسم الكامل" }} *</label>
+        <input type="text" id="fullName" name="fullName" placeholder="مثال: فاطمة الزهراء بنعلي" required>
+        <span class="form-error" id="fullNameError">المرجو كتابة {{ section.settings.name_label | default: "الاسم الكامل" }} ديالك</span>
+      </div>
+
+      <div class="form-group">
+        <label for="fullAddress">{{ section.settings.address_label | default: "العنوان الكامل" }} *</label>
+        <input type="text" id="fullAddress" name="fullAddress" placeholder="مثال: شارع الحسن الثاني، رقم 15، دار البيضاء" required>
+        <span class="form-error" id="fullAddressError">المرجو كتابة {{ section.settings.address_label | default: "العنوان الكامل" }} ديالك</span>
+      </div>
+
+      <div class="form-group">
+        <label for="phoneNumber">{{ section.settings.phone_label | default: "رقم الهاتف" }} *</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="مثال: 0612345678" required dir="ltr">
+        <span class="form-error" id="phoneNumberError">المرجو كتابة {{ section.settings.phone_label | default: "رقم الهاتف" }} ديالك</span>
+      </div>
+
+      <button type="submit" class="order-submit-btn">
+        <span class="btn-text">{{ section.settings.submit_button_text | default: "تأكيد الطلب" }}</span>
+        <span class="btn-loading" style="display:none;">جاري التحميل...</span>
+      </button>
+
+      <p class="order-form-note">🔒 معلوماتك محمية وآمنة. ما كاتخلصي حتى يوصلك المنتج.</p>
+    </form>
+  </div>
+</div>
+
+<script>
+  window.ShopifyLandingConfig = {
+    upsellEnabled: {{ section.settings.upsell_enabled | json }},
+    upsellVariantId: {{ section.settings.upsell_variant_id | json }}
+  };
+</script>
+
+{%- if section.settings.upsell_enabled -%}
+<!-- One-Click Audio Upsell Modal -->
+<div class="order-modal-overlay" id="upsellModal" style="display: none; align-items: center; justify-content: center; z-index: 100000;">
+  <div class="order-modal" style="max-width: 480px; position: relative; border: 2px solid #cb6387; border-radius: 14px; background: #fff; padding: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); direction: rtl; text-align: right;">
+    <button type="button" class="order-modal-close" id="upsellModalClose" style="position: absolute; top: 10px; right: 15px; font-size: 28px; border: none; background: none; cursor: pointer; color: #888;">&times;</button>
+    <div class="order-modal-header" style="text-align: center; margin-bottom: 12px;">
+      <h3 style="font-size: 22px; color: #cb6387; font-weight: 800; margin: 0 0 4px;">🎁 عرض خاص ومحدود جداً!</h3>
+      <p style="font-size: 15px; color: #121212; font-weight: 700; margin: 4px 0 0;">{{ section.settings.upsell_title }}</p>
+    </div>
+    
+    <div style="text-align: center; margin: 15px 0;">
+      {%- if section.settings.upsell_image != blank -%}
+        <img src="{{ section.settings.upsell_image | image_url: width: 300, height: 300 }}" alt="{{ section.settings.upsell_title }}" style="width: 140px; height: 140px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+      {%- else -%}
+        <img src="{{ 'product-main.jpg' | asset_url }}" alt="Upsell Image" style="width: 140px; height: 140px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+      {%- endif -%}
+    </div>
+    
+    <div class="upsell-description" style="font-size: 14px; text-align: center; color: #555; line-height: 1.5; padding: 0 10px; margin-bottom: 15px;">
+      {{ section.settings.upsell_description }}
+    </div>
+
+    <!-- Audio Player (Voice Note) -->
+    {%- if section.settings.upsell_audio_url != blank -%}
+      <div class="upsell-audio-container" style="background: #fff5f7; border: 1px dashed #cb6387; border-radius: 10px; padding: 12px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; direction: rtl; text-align: right;">
+        <button type="button" id="upsellPlayBtn" style="background: #cb6387; color: white; border: none; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; padding: 0;">
+          <svg id="upsellPlayIcon" width="16" height="16" viewBox="0 0 24 24" fill="white" style="position: relative; left: -1px;"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="upsellPauseIcon" width="16" height="16" viewBox="0 0 24 24" fill="white" style="display: none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+        <div style="flex-grow: 1; text-align: right;">
+          <p style="font-size: 12px; font-weight: 700; color: #cb6387; margin: 0 0 4px;">🔊 رسالة صوتية توجيهية (اضغطي للاستماع)</p>
+          <div style="background: #ddd; height: 4px; border-radius: 2px; position: relative; overflow: hidden; width: 100%;">
+            <div id="upsellAudioProgress" style="background: #cb6387; height: 100%; width: 0%; transition: width 0.1s linear;"></div>
+          </div>
+        </div>
+        <audio id="upsellAudio" src="{{ section.settings.upsell_audio_url }}"></audio>
+      </div>
+    {%- endif -%}
+
+    <div style="text-align: center; margin: 15px 0;">
+      <span style="font-size: 14px; color: #aaa; text-decoration: line-through; margin-left: 8px;">{{ section.settings.upsell_compare_price }} درهم</span>
+      <span style="font-size: 24px; font-weight: 900; color: #ef4a65;">{{ section.settings.upsell_price }} <small style="font-size: 14px; font-weight: 600;">درهم فقط!</small></span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <button type="button" class="order-submit-btn" id="upsellAcceptBtn" style="background-color: #ef4a65 !important; color: white !important; font-weight: bold !important; border-radius: 40px !important; border: none; padding: 12px; font-size: 15px; cursor: pointer; transition: all 0.2s;">
+        {{ section.settings.upsell_yes_btn }}
+      </button>
+      <button type="button" id="upsellDeclineBtn" style="background: none; border: none; color: #888; font-size: 13px; text-decoration: underline; cursor: pointer; padding: 5px;">
+        {{ section.settings.upsell_no_btn }}
+      </button>
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+<script>
+// Inline offer card selection + inline form synchronization
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    var cards = document.querySelectorAll('.offer-inline-card');
+    var qtyInput = document.getElementById('orderQty');
+    var priceInput = document.getElementById('orderPrice');
+    var offerText = document.getElementById('modalOfferText');
+
+    function syncOffer(qty, price, title) {
+      if (qtyInput) qtyInput.value = qty;
+      if (priceInput) priceInput.value = price;
+      if (offerText) offerText.textContent = title + ' — ' + price + ' درهم';
+    }
+
+    // Sync initial preselected offer on page load
+    var initialActive = document.querySelector('.offer-inline-card--active') || document.querySelector('.offer-inline-card');
+    if (initialActive) {
+      var initialQty = initialActive.dataset.qty || "1";
+      var initialPrice = initialActive.dataset.price || "0";
+      var titleElement = initialActive.querySelector('div[style*="font-size: 16px"]');
+      var initialTitle = titleElement ? titleElement.textContent.replace(/[\n\r]+/g, ' ').replace(/\s+/g, ' ').trim() : (initialQty + ' قطعة');
+      syncOffer(initialQty, initialPrice, initialTitle);
+    }
+
+    cards.forEach(function(card) {
+      card.addEventListener('click', function() {
+        // Update selection visuals
+        cards.forEach(function(c) {
+          c.style.borderColor = '#e5e5e5';
+          c.style.background = '#fff';
+          c.style.boxShadow = 'none';
+          c.classList.remove('offer-inline-card--active');
+        });
+        
+        var accentColor = '{{ section.settings.accent_color | default: "#cb6387" }}';
+        var accentBg = 'linear-gradient(180deg, {{ section.settings.accent_color_light | default: "#fff5f7" }} 0%, #fff 100%)';
+        
+        card.style.borderColor = accentColor;
+        card.style.background = accentBg;
+        card.style.boxShadow = '0 4px 16px rgba(203, 99, 135, 0.12)';
+        card.classList.add('offer-inline-card--active');
+
+        // Sync clicked card values to the inline form instantly
+        var qty = card.dataset.qty;
+        var price = card.dataset.price;
+        var titleElement = card.querySelector('div[style*="font-size: 16px"]');
+        var title = titleElement ? titleElement.textContent.replace(/[\n\r]+/g, ' ').replace(/\s+/g, ' ').trim() : (qty + ' قطعة');
+        
+        syncOffer(qty, price, title);
+      });
+    });
+
+    // Make the main CTA button scroll smoothly to the offers section & focus input
+    var mainCTA = document.getElementById('ProductSubmitButton-template--28684899876945__main');
+    if (mainCTA) {
+      mainCTA.type = 'button';
+      mainCTA.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var targetSection = document.querySelector('.offer-bundle-inline');
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          setTimeout(function() {
+            var fullName = document.getElementById('fullName');
+            if (fullName) fullName.focus();
+          }, 800);
+        }
+      });
+    }
+  });
+})();
+</script>
+
+</product-form>
+      </div>
+      
+
+      
+
+      
+
+
+
+<div class="guarantee-badges-container">
+  
+  
+  
+</div> 
+
+    
+
+  
+      
+
+<div class="guarantee-container guarantee-container-money_back_guarantee_kbK7cN" style="background-color: #ffffff; 
+  padding: 15px;
+  margin-top: -10px;
+  margin-bottom: -5px;
+  
+  border: 1px dashed #121212;
+  border-radius: 0px;
+  ">
+  <div class="badge-container" style="min-width: 50px;">
+    <div class="badge-circle" style="border-color: #121212; width: 45px; height: 45px;">
+      
+        <img src="{{ 'badge.jpg' | asset_url }}" alt="Guarantee Badge" srcset="{{ 'badge.jpg' | asset_url }} 30w" width="30" height="30" class="badge-icon">
+      
+    </div>
+  </div>
+  <div class="guarantee-text">
+    <p>
+      <span class="guarantee-text-small" style="color: #121212;">60-Day Money Back Guarantee </span>
+      <span class="guarantee-text-large" style="color: #121212;">Didn't work for you? Contact us within 60 days for a full refund! No questions asked.</span>
+    </p>
+  </div>
+</div>
+
+
+
+    
+
+  
+
+  
+
+  
+
+  
+
+  
+      
+<div class="product-faq">
+  <div class="faq-container">
+    
+
+        <div class="faq-item">
+          <div class="faq-question">
+            
+            <span class="faq-question-text">تفاصيل المنتج</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            
+              <p>رضاعة طبيعية مريحة وبلا عذاب. <strong>{{ product.title }}</strong> كتعطيك راحة تامة وحرية كاملة فاش كتحركي. <strong>رضاعة طبيعية ذكية</strong> مصممة خصيصاً باش توفر ليك الوقت والجهد وتخليك جبدي الحليب لولدك فكل وقت وبلا ألم.</p><p>بالمقارنة مع مضخات الحليب العادية لي فيها الخيوط والصداع، مضخة Tighli اللاسلكية خفيفة بزاف وكتلصق فالحمالة الصدرية ديالك مباشرة. تقدري تخدمي، طيبي، أو تقراي كتاب وهي كتخدم فصمت تام وبلا ألم. كتجي بـ 2 ديال الأنماط و 9 د المستويات ديال السحب المريح باش تختاري لي يناسبك.</p><p>مصنوعة من سيليكون طبي 100% وصحي وخالي من BPA، وكتنظف بسهولة حيت فيها غير 4 د القطع فقط! بطارية قوية فاش كتشحنها بالـ USB-C كتدوم حتى لـ 2.5 ساعة ديال الاستعمال المستمر.</p><ul><li>سيليكون طبي 100% صحي<br></li><li>خالية من مادة BPA الضارة<br></li><li>محرك صامت وهادئ جداً<br></li><li>سهلة فالتركيب والتنظيف<br></li><li>الوزن خفيف جداً ومريح فالحمالة الصدرية<br></li></ul>
+            
+          </div>
+        </div>
+      
+    
+
+        <div class="faq-item">
+          <div class="faq-question">
+            
+            <span class="faq-question-text">كيفاش كتستعمل</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            
+              <ol><li><strong>ركبي القطع بسهولة</strong> – ركبي القطع الـ 4 ديال مضخة Tighli وتأكدي أنها معقمة ونظيفة.<br></li><li><strong>حطيها فالحمالة الصدرية</strong> – حطي المضخة فالحمالة الصدرية ديالك مباشرة وثبتيها فبلاصتها المريحة.<br></li><li><strong>شغليها واختاري المستوى</strong> – ضغطي على زر التشغيل، واختاري النمط (المساج أو السحب) والمستوى لي كيريحك من بين 9 د المستويات.<br></li><li><strong>فرغي الحليب بسهولة</strong> – ملي تسالي، حيديها وفرغي الحليب فالمرضع ديال الرضيع ديالك بكل سهولة وبلا ما يتزلع.</li></ol>
+            
+          </div>
+        </div>
+      
+    
+
+        <div class="faq-item">
+          <div class="faq-question">
+            
+            <span class="faq-question-text">نتائج وأرقام مؤكدة</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            
+              <p>من خلال تجارب واقعية مع أمهات مرضعات، <strong>{{ product.title }}</strong> عطات نتائج رائعة وريحت الأمهات من آلام ومشاكل الرضاعة العادية.</p><ul><li><strong>+31.4%</strong> زيادة فكمية الحليب المستخرجة<br></li><li><strong>-4.5%</strong> تقليل آلام وضغط السحب على الصدر<br></li><li><strong>+24.8%</strong> راحة وحرية حركة كاملة من أول استعمال<br></li><li><strong>+23.4%</strong> هدوء وصمت تام ومكاينش الصداع<br></li><li><strong>+2.9%</strong> سيليكون طبي صحي ومضاد للتسرب<br></li></ul><p><em>*هذه الأرقام مأخوذة من تجارب واقعية لأمهات استعملوا مضخة Tighli اللاسلكية.</em></p>
+            
+          </div>
+        </div>
+      
+    
+
+        <div class="faq-item">
+          <div class="faq-question">
+            
+            <span class="faq-question-text">المميزات الرائعة</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            
+              <ul><li><strong>مساج سيليكون مريح</strong> – وسادة دائرية رطبة كدير مساج خفيف كيحفز تدفق الحليب بلا ألم.<br></li><li><strong>شحن سريع USB-C</strong> – بطارية قوية كتدوم حتى لـ 2.5 ساعة وكتمكنك من شحنها فكل مكان بالـ USB-C.<br></li><li><strong>محرك صامت 38 ديسيبل</strong> – هدوء تام وصمت مريح باش تقدري تجبدي الحليب حتى والرضيع ناعس حداك.<br></li><li><strong>شاشة LED ذكية</strong> – شاشة واضحة كتعطيك الوقت والنمط والمستوى والبطارية بلمسة واحدة.<br></li><li><strong>تصميم خفيف وبدون خيوط</strong> – تقدري تحركي وتخرجي وتقضي شغالك بكل حرية وبلا ما تبقاي لاصقة مع الخيوط.<br></li><li><strong>مضاد للارتجاع والتسرب</strong> – نظام مغلق وصحي كيحمي الحليب من التلوث وكيمنع أي تسرب نهائياً.<br></li><li><strong>سهلة فالتركيب والتنظيف</strong> – كتتفكك لـ 4 د القطع فقط، مما كيجعل غسيلها وتعقيمها ساهل وسريع.<br></li><li><strong>سيليكون طبي 100% صحي</strong> – مصنوعة من مواد صحية خالية من مادة BPA الضارة لحماية طفلك.</li></ul>
+            
+          </div>
+        </div>
+      
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </div>
+</div>
+
+
+
+ 
+
+    
+
+  
+      
+
+<div class="video-carousel-container" data-enable-autoplay="true" data-show-sound-controls="false" data-play-button-size="30" data-sound-button-size="30" data-play-button-bg-color="#000000" data-play-button-bg-opacity="35" data-sound-button-bg-color="#000000" data-sound-button-bg-opacity="35">
+  <h2 class="carousel-heading" style="color: #121212; font-size: 24px;">شوفيها كيفاش كتخدم</h2>
+  
+  
+  
+  <div class="video-carousel">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <div class="video-item video-playing" data-video-id="carousel_default_video_akUGBF">
+          <div class="video-thumbnail">
+            <div class="gradient-overlay"></div>
+            
+              
+              <div class="shopify-video-container">
+                <img class="carousel-video" src="{{ 'product-lifestyle.jpg' | asset_url }}" alt="Video thumbnail" loading="lazy" width="" height="" style="display: none;">
+                <div class="video-type" data-type="shopify" data-video-id="67266961899601"></div>
+                <div style="display: none;" class="hidden-video-data">
+                  <video playsinline="playsinline" loop="loop" muted="muted" preload="metadata" poster="{{ '0d1ebdb9a952408fa86482ff4aee51d8.thumbnail.0000000000_small.jpg' | asset_url }}"><source src="{{ 'video-ugc-1.mp4' | asset_url }}" type="video/mp4"><img src="https:{{ '0d1ebdb9a952408fa86482ff4aee51d8.thumbnail.0000000000_small.jpg' | asset_url }}"></video>
+                </div>
+              </div>
+              <div class="video-play-overlay">
+                <button class="testimonial-play-button" aria-label="Play video">
+                  <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+                </button>
+              </div>
+            
+          <div class="inline-video-container" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 5;">
+                  <video muted="" loop="" playsinline="" preload="metadata" poster="{{ '0d1ebdb9a952408fa86482ff4aee51d8.thumbnail.0000000000_small.jpg' | asset_url }}"><source src="{{ 'video-ugc-1.mp4' | asset_url }}" type="video/mp4"><img src="https:{{ '0d1ebdb9a952408fa86482ff4aee51d8.thumbnail.0000000000_small.jpg' | asset_url }}"></video>
+                </div></div>
+        </div>
+      
+    
+      
+        <div class="video-item video-playing" data-video-id="carousel_default_video_eH4e7V">
+          <div class="video-thumbnail">
+            <div class="gradient-overlay"></div>
+            
+              
+              <div class="shopify-video-container">
+                <img class="carousel-video" src="{{ 'why-1-massage.jpg' | asset_url }}" alt="Video thumbnail" loading="lazy" width="" height="" style="display: none;">
+                <div class="video-type" data-type="shopify" data-video-id="67266961965137"></div>
+                <div style="display: none;" class="hidden-video-data">
+                  <video playsinline="playsinline" loop="loop" muted="muted" preload="metadata" poster="{{ '215159f343c4429b9a77004a58cee25a.thumbnail.0000000000_small.jpg' | asset_url }}"><source src="{{ 'video-ugc-2.mp4' | asset_url }}" type="video/mp4"><img src="https:{{ '215159f343c4429b9a77004a58cee25a.thumbnail.0000000000_small.jpg' | asset_url }}"></video>
+                </div>
+              </div>
+              <div class="video-play-overlay">
+                <button class="testimonial-play-button" aria-label="Play video">
+                  <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+                </button>
+              </div>
+            
+          <div class="inline-video-container" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 5;">
+                  <video muted="" loop="" playsinline="" preload="metadata" poster="{{ '215159f343c4429b9a77004a58cee25a.thumbnail.0000000000_small.jpg' | asset_url }}"><source src="{{ 'video-ugc-2.mp4' | asset_url }}" type="video/mp4"><img src="https:{{ '215159f343c4429b9a77004a58cee25a.thumbnail.0000000000_small.jpg' | asset_url }}"></video>
+                </div></div>
+        </div>
+      
+    
+      
+        <div class="video-item video-playing" data-video-id="carousel_default_video_DX3XK4">
+          <div class="video-thumbnail">
+            <div class="gradient-overlay"></div>
+            
+              
+              <div class="shopify-video-container">
+                <img class="carousel-video" src="{{ 'why-3-silent.jpg' | asset_url }}" alt="Video thumbnail" loading="lazy" width="" height="" style="display: none;">
+                <div class="video-type" data-type="shopify" data-video-id="67266962063441"></div>
+                <div style="display: none;" class="hidden-video-data">
+                  <video playsinline="playsinline" loop="loop" muted="muted" preload="metadata" poster="{{ '87c7b2457a8240c9ae780261949d28b6.thumbnail.0000000000_small.jpg' | asset_url }}"><source src="{{ 'video-ugc-3.mp4' | asset_url }}" type="video/mp4"><img src="{{ '87c7b2457a8240c9ae780261949d28b6.thumbnail.0000000000_small.jpg' | asset_url }}"></video>
+                </div>
+              </div>
+              <div class="video-play-overlay">
+                <button class="testimonial-play-button" aria-label="Play video">
+                  <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+                </button>
+              </div>
+            
+          <div class="inline-video-container" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 5;">
+                  <video muted="" loop="" playsinline="" preload="metadata" poster="{{ '87c7b2457a8240c9ae780261949d28b6.thumbnail.0000000000_small.jpg' | asset_url }}"><source src="{{ 'video-ugc-3.mp4' | asset_url }}" type="video/mp4"><img src="{{ '87c7b2457a8240c9ae780261949d28b6.thumbnail.0000000000_small.jpg' | asset_url }}"></video>
+                </div></div>
+        </div>
+      
+    
+      
+        <div class="video-item video-playing" data-video-id="carousel_default_video_6k7bGt">
+          <div class="video-thumbnail">
+            <div class="gradient-overlay"></div>
+            
+              
+              <div class="shopify-video-container">
+                <img class="carousel-video" src="{{ 'review-3-unboxing.jpg' | asset_url }}" alt="Video thumbnail" loading="lazy" width="" height="" style="display: none;">
+                <div class="video-type" data-type="shopify" data-video-id="67266961997905"></div>
+                <div style="display: none;" class="hidden-video-data">
+                  <video playsinline="playsinline" loop="loop" muted="muted" preload="metadata" poster="{{ 'a4ce1ad5b7884c2cbc6d083a74398a2a.thumbnail.0000000000_small.jpg' | asset_url }}"><source src="{{ 'video-ugc-1.mp4' | asset_url }}" type="video/mp4"><img src="{{ 'a4ce1ad5b7884c2cbc6d083a74398a2a.thumbnail.0000000000_small.jpg' | asset_url }}"></video>
+                </div>
+              </div>
+              <div class="video-play-overlay">
+                <button class="testimonial-play-button" aria-label="Play video">
+                  <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+                </button>
+              </div>
+            
+          <div class="inline-video-container" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 5;">
+                  <video muted="" loop="" playsinline="" preload="metadata" poster="{{ 'a4ce1ad5b7884c2cbc6d083a74398a2a.thumbnail.0000000000_small.jpg' | asset_url }}"><source src="{{ 'video-ugc-1.mp4' | asset_url }}" type="video/mp4"><img src="{{ 'a4ce1ad5b7884c2cbc6d083a74398a2a.thumbnail.0000000000_small.jpg' | asset_url }}"></video>
+                </div></div>
+        </div>
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+<!-- Video Modal -->
+<div id="videoModal" class="video-modal" style="display: none;">
+  <div class="video-modal-content">
+    <button type="button" class="close-modal" aria-label="Close video">×</button>
+    <div class="video-container"></div>
+  </div>
+</div>
+
+<script src="{{ 'video-carousel.js' | asset_url }}" type="text/javascript"></script>
+
+
+
+    
+
+  
+      
+<div class="customer-review-card customer-review-customer_review_XcjYbg" style="margin: 5px 0px 15px 0px;">
+  <div class="customer-review-avatar-container">
+    <div class="customer-review-avatar">
+      
+        <img src="{{ 'product-lifestyle.jpg' | asset_url }}" srcset="{{ 'product-lifestyle.jpg' | asset_url }} 1x, {{ 'product-lifestyle.jpg' | asset_url }} 2x" alt="سناء. ب" loading="lazy" width="" height="">
+      
+    </div>
+  </div>
+  <div class="customer-review-content">
+    <div class="customer-review-header">
+      <div class="customer-review-name">
+        سناء. ب
+        <svg class="customer-review-verified" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5924 3.20027C9.34888 3.4078 9.22711 3.51158 9.09706 3.59874C8.79896 3.79854 8.46417 3.93721 8.1121 4.00672C7.95851 4.03705 7.79903 4.04977 7.48008 4.07522C6.6787 4.13918 6.278 4.17115 5.94371 4.28923C5.17051 4.56233 4.56233 5.17051 4.28923 5.94371C4.17115 6.278 4.13918 6.6787 4.07522 7.48008C4.04977 7.79903 4.03705 7.95851 4.00672 8.1121C3.93721 8.46417 3.79854 8.79896 3.59874 9.09706C3.51158 9.22711 3.40781 9.34887 3.20027 9.5924C2.67883 10.2043 2.4181 10.5102 2.26522 10.8301C1.91159 11.57 1.91159 12.43 2.26522 13.1699C2.41811 13.4898 2.67883 13.7957 3.20027 14.4076C3.40778 14.6511 3.51158 14.7729 3.59874 14.9029C3.79854 15.201 3.93721 15.5358 4.00672 15.8879C4.03705 16.0415 4.04977 16.201 4.07522 16.5199C4.13918 17.3213 4.17115 17.722 4.28923 18.0563C4.56233 18.8295 5.17051 19.4377 5.94371 19.7108C6.278 19.8288 6.6787 19.8608 7.48008 19.9248C7.79903 19.9502 7.95851 19.963 8.1121 19.9933C8.46417 20.0628 8.79896 20.2015 9.09706 20.4013C9.22711 20.4884 9.34887 20.5922 9.5924 20.7997C10.2043 21.3212 10.5102 21.5819 10.8301 21.7348C11.57 22.0884 12.43 22.0884 13.1699 21.7348C13.4898 21.5819 13.7957 21.3212 14.4076 20.7997C14.6511 20.5922 14.7729 20.4884 14.9029 20.4013C15.201 20.2015 15.5358 20.0628 15.8879 19.9933C16.0415 19.963 16.201 19.9502 16.5199 19.9248C17.3213 19.8608 17.722 19.8288 18.0563 19.7108C18.8295 19.4377 19.4377 18.8295 19.7108 18.0563C19.8288 17.722 19.8608 17.3213 19.9248 16.5199C19.9502 16.201 19.963 16.0415 19.9933 15.8879C20.0628 15.5358 20.2015 15.201 20.4013 14.9029C20.4884 14.7729 20.5922 14.6511 20.7997 14.4076C21.3212 13.7957 21.5819 13.4898 21.7348 13.1699C22.0884 12.43 22.0884 11.57 21.7348 10.8301C21.5819 10.5102 21.3212 10.2043 20.7997 9.5924C20.5922 9.34887 20.4884 9.22711 20.4013 9.09706C20.2015 8.79896 20.0628 8.46417 19.9933 8.1121C19.963 7.95851 19.9502 7.79903 19.9248 7.48008C19.8608 6.6787 19.8288 6.278 19.7108 5.94371C19.4377 5.17051 18.8295 4.56233 18.0563 4.28923C17.722 4.17115 17.3213 4.13918 16.5199 4.07522C16.201 4.04977 16.0415 4.03705 15.8879 4.00672C15.5358 3.93721 15.201 3.79854 14.9029 3.59874C14.7729 3.51158 14.6511 3.40781 14.4076 3.20027C13.7957 2.67883 13.4898 2.41811 13.1699 2.26522C12.43 1.91159 11.57 1.91159 10.8301 2.26522C10.5102 2.4181 10.2043 2.67883 9.5924 3.20027ZM16.3735 9.86314C16.6913 9.5453 16.6913 9.03 16.3735 8.71216C16.0557 8.39433 15.5403 8.39433 15.2225 8.71216L10.3723 13.5624L8.77746 11.9676C8.45963 11.6498 7.94432 11.6498 7.62649 11.9676C7.30866 12.2854 7.30866 12.8007 7.62649 13.1186L9.79678 15.2889C10.1146 15.6067 10.6299 15.6067 10.9478 15.2889L16.3735 9.86314Z" fill="#cb6387"></path>
+        </svg>
+      </div>
+      <div class="customer-review-stars">
+        
+          
+            <svg class="customer-review-star customer-review-star--filled" width="16" height="16" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 4.588l2.833 8.719H28l-7.416 5.387 2.832 8.719L16 22.023l-7.417 5.389 2.833-8.719L4 13.307h9.167L16 4.588z"></path></svg>
+          
+        
+          
+            <svg class="customer-review-star customer-review-star--filled" width="16" height="16" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 4.588l2.833 8.719H28l-7.416 5.387 2.832 8.719L16 22.023l-7.417 5.389 2.833-8.719L4 13.307h9.167L16 4.588z"></path></svg>
+          
+        
+          
+            <svg class="customer-review-star customer-review-star--filled" width="16" height="16" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 4.588l2.833 8.719H28l-7.416 5.387 2.832 8.719L16 22.023l-7.417 5.389 2.833-8.719L4 13.307h9.167L16 4.588z"></path></svg>
+          
+        
+          
+            <svg class="customer-review-star customer-review-star--filled" width="16" height="16" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 4.588l2.833 8.719H28l-7.416 5.387 2.832 8.719L16 22.023l-7.417 5.389 2.833-8.719L4 13.307h9.167L16 4.588z"></path></svg>
+          
+        
+          
+            <svg class="customer-review-star customer-review-star--filled" width="16" height="16" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 4.588l2.833 8.719H28l-7.416 5.387 2.832 8.719L16 22.023l-7.417 5.389 2.833-8.719L4 13.307h9.167L16 4.588z"></path></svg>
+          
+        
+      </div>
+    </div>
+    <p class="customer-review-text">كنت مترددة فالبداية ولكن الحمد لله جربتها! هاد المضخة خلاتني نجبد الحليب بلا ألم وساعدتني بزاف ووفرات عليا الوقت. تمنيت لو شريتها من قبل!</p>
+  </div>
+</div>
+
+
+
+    
+
+
+            
+
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+<script src="{{ 'product-details.js' | asset_url }}" type="text/javascript"></script>
+<script src="{{ 'product-info.js' | asset_url }}" type="text/javascript"></script>
+<script src="{{ 'variant-selector.js' | asset_url }}" type="text/javascript"></script>
+<script src="{{ 'product-form.js' | asset_url }}" type="text/javascript"></script>
+<script src="{{ 'shop-product-details.js' | asset_url }}" type="text/javascript"></script>
+<script src="{{ 'product-gallery.js' | asset_url }}" type="text/javascript"></script>
+
+{%- if section.settings.whatsapp_enabled -%}
+  <!-- Floating WhatsApp CTA -->
+  <a href="https://wa.me/{{ section.settings.whatsapp_number | replace: '+', '' | replace: ' ', '' }}?text={{ section.settings.whatsapp_message | url_encode }}" 
+     class="floating-whatsapp-cta whatsapp-position-{{ section.settings.whatsapp_position }}" 
+     target="_blank" 
+     rel="noopener noreferrer" 
+     aria-label="Contact us on WhatsApp">
+    <div class="whatsapp-pulse"></div>
+    <div class="whatsapp-icon-wrapper">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19.001 4.908A9.817 9.817 0 0 0 11.992 2C6.534 2 2.085 6.448 2.08 11.91c0 1.748.458 3.45 1.321 4.956L2 22l5.255-1.377a9.816 9.816 0 0 0 4.73 1.206h.005c5.46 0 9.908-4.448 9.913-9.913a9.807 9.807 0 0 0-2.899-7.008zM11.992 20.158a8.16 8.16 0 0 1-4.168-1.14l-.299-.178-3.1 1.01L3.435 18a8.18 8.18 0 0 1-1.277-4.3c0-4.5 3.666-8.163 8.183-8.163 2.185 0 4.24.85 5.787 2.399a8.138 8.138 0 0 1 2.394 5.794c-.005 4.512-3.673 8.176-8.175 8.176zm4.49-6.14c-.246-.123-1.46-.72-1.685-.803-.225-.082-.39-.123-.553.123-.163.246-.635.803-.78.966-.143.163-.288.184-.533.061a6.712 6.712 0 0 1-1.977-1.218 7.42 7.42 0 0 1-1.368-1.705c-.144-.245-.015-.378.108-.5a15.42 15.42 0 0 0 .54-.648c.06-.098.03-.18-.016-.263-.045-.081-.39-.94-.533-1.286-.14-.337-.282-.292-.39-.297l-.33-.005c-.225 0-.59.084-.9.42-.31.336-1.18 1.15-1.18 2.8s1.2 3.24 1.365 3.47c.164.228 2.36 3.6 5.717 5.05 3.355 1.448 3.355.966 3.97.905.613-.061 1.685-.688 1.92-1.353.237-.665.237-1.233.165-1.353-.07-.12-.245-.204-.49-.327z" fill="white"/>
+      </svg>
+    </div>
+  </a>
+
+  <style>
+    .floating-whatsapp-cta {
+      position: fixed;
+      bottom: 85px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #25D366;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .floating-whatsapp-cta:hover {
+      transform: scale(1.1);
+    }
+    
+    .whatsapp-position-right {
+      right: 20px;
+    }
+    
+    .whatsapp-position-left {
+      left: 20px;
+    }
+    
+    .whatsapp-icon-wrapper {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .whatsapp-pulse {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: #25D366;
+      border-radius: 50%;
+      z-index: 1;
+      animation: whatsappPulse 2s infinite ease-out;
+      opacity: 0.7;
+    }
+    
+    @keyframes whatsappPulse {
+      0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+      }
+      70% {
+        transform: scale(1.4);
+        box-shadow: 0 0 0 20px rgba(37, 211, 102, 0);
+      }
+      100% {
+        transform: scale(1.5);
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+        opacity: 0;
+      }
+    }
+  </style>
+{%- endif -%}
+
+<!-- Gallery Lightbox Modal (Interactive Zoom & Swipe) -->
+<div id="GalleryLightbox" class="lightbox-overlay" style="display: none;">
+  <span class="lightbox-close">&times;</span>
+  <div class="lightbox-container">
+    <img id="LightboxImage" src="" alt="Zoomed image">
+    <div class="lightbox-nav-prev">&#10094;</div>
+    <div class="lightbox-nav-next">&#10095;</div>
+  </div>
+</div>
+
+<style>
+  .lightbox-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.9);
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 20px; right: 30px;
+    color: #fff; font-size: 40px; font-weight: bold;
+    cursor: pointer;
+  }
+  .lightbox-container {
+    position: relative;
+    max-width: 90%; max-height: 80%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  #LightboxImage {
+    max-width: 100%; max-height: 100%;
+    border-radius: 8px;
+    transition: transform 0.25s ease;
+    cursor: zoom-in;
+  }
+  .lightbox-nav-prev, .lightbox-nav-next {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    color: #fff; font-size: 30px; font-weight: bold;
+    padding: 16px; cursor: pointer;
+    background: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    width: 50px; height: 50px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lightbox-nav-prev { left: -60px; }
+  .lightbox-nav-next { right: -60px; }
+  
+  @media (max-width: 768px) {
+    .lightbox-nav-prev { left: 10px; }
+    .lightbox-nav-next { right: 10px; }
+    #LightboxImage {
+      max-width: 95%; max-height: 90%;
+    }
+  }
+</style>
+
+<script>
+// Lightbox Trigger
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    var mainImages = document.querySelectorAll('.shop-main-image');
+    var lightbox = document.getElementById('GalleryLightbox');
+    var lightboxImg = document.getElementById('LightboxImage');
+    var closeBtn = document.querySelector('.lightbox-close');
+    var prevBtn = document.querySelector('.lightbox-nav-prev');
+    var nextBtn = document.querySelector('.lightbox-nav-next');
+    var currentIdx = 0;
+    
+    var imageUrls = Array.from(mainImages).map(function(img) {
+      return img.src;
+    });
+
+    mainImages.forEach(function(img, idx) {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', function() {
+        currentIdx = idx;
+        openLightbox();
+      });
+    });
+
+    function openLightbox() {
+      if (!lightbox || !lightboxImg) return;
+      lightboxImg.src = imageUrls[currentIdx];
+      lightbox.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function() {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      });
+    }
+
+    if (lightbox) {
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+          lightbox.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        currentIdx = (currentIdx - 1 + imageUrls.length) % imageUrls.length;
+        lightboxImg.src = imageUrls[currentIdx];
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        currentIdx = (currentIdx + 1) % imageUrls.length;
+        lightboxImg.src = imageUrls[currentIdx];
+      });
+    }
+
+    if (lightboxImg) {
+      lightboxImg.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (lightboxImg.style.transform === 'scale(1.5)') {
+          lightboxImg.style.transform = 'scale(1)';
+          lightboxImg.style.cursor = 'zoom-in';
+        } else {
+          lightboxImg.style.transform = 'scale(1.5)';
+          lightboxImg.style.cursor = 'zoom-out';
+        }
+      });
+    }
+  });
+})();
+</script>
+
+
+{% schema %}
+{
+  "name": "Product Main Section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "🎨 دليل المظهر والألوان (Visual Identity)"
+    },
+    {
+      "type": "paragraph",
+      "content": "💡 إرشاد للمبتدئين: هذا القالب مصمم ليسحب صور المنتج، العنوان، والخيارات (كالألوان والمقاسات) تلقائياً من صفحة المنتج الأساسية في شوبيفاي! كل ما عليك هو تفعيل وضبط الألوان والتنسيقات أدناه لتناسب هويتك البصرية."
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "لون خلفية أزرار الشراء الرئيسية",
+      "info": "💡 هاد اللون كيتحكم في خلفية زر الشراء الرئيسي، زر التثبيت العائم السفلي، وزر إرسال الطلب في الاستمارة. يفضل اختيار لون جذاب وواضح (مثال: الوردي، الأحمر أو الأخضر).",
+      "default": "#ef4a65"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "لون نص أزرار الشراء",
+      "info": "💡 لون النص المكتوب داخل أزرار الشراء (ينصح بشدة باختيار اللون الأبيض #ffffff لسهولة القراءة والوضوح التام).",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "لون تمييز عروض التوفير (Accent Color)",
+      "info": "💡 هاد اللون كيتحكم في إطارات وشارات عروض التوفير النشطة والباك اللي كيحددو الزبون حالياً في الصفحة.",
+      "default": "#cb6387"
+    },
+    {
+      "type": "color",
+      "id": "accent_color_light",
+      "label": "لون خلفية عرض التوفير المحدد",
+      "info": "💡 درجة لون الخلفية الفاتحة المتدرجة اللي كتظهر داخل كارت عرض التوفير النشط اللي ك يختارو الزبون.",
+      "default": "#fff5f7"
+    },
+    {
+      "type": "header",
+      "content": "📝 نصوص استمارة الشراء السريع (Moroccan COD Form)"
+    },
+    {
+      "type": "text",
+      "id": "form_heading",
+      "label": "عنوان استمارة الشراء البارز",
+      "info": "💡 العنوان الكبير اللي ك يظهر للزبون في أعلى استمارة الطلب باش يقنعو يعمر معلوماتو (مثال بالدارجة: عمر الاستمارة للطلب والتوصيل فابور).",
+      "default": "عمر الاستمارة للطلب و التوصيل فابور"
+    },
+    {
+      "type": "text",
+      "id": "name_label",
+      "label": "اسم خانة الاسم الكامل",
+      "info": "💡 النص التوضيحي المكتوب فوق خانة الاسم الكامل في الاستمارة لتوجيه الزبون.",
+      "default": "الاسم الكامل"
+    },
+    {
+      "type": "text",
+      "id": "phone_label",
+      "label": "اسم خانة رقم الهاتف",
+      "info": "💡 النص التوضيحي المكتوب فوق خانة رقم الهاتف (الاستمارة مبرمجة لتنسيق وتدقيق أرقام الهواتف المغربية تلقائياً!).",
+      "default": "رقم الهاتف"
+    },
+    {
+      "type": "text",
+      "id": "address_label",
+      "label": "اسم خانة العنوان الكامل",
+      "info": "💡 النص التوضيحي المكتوب فوق خانة عنوان السكن لمساعدة الزبون على إدخال عنوان دقيق يسهل عمل الموزعين.",
+      "default": "العنوان الكامل"
+    },
+    {
+      "type": "text",
+      "id": "city_label",
+      "label": "اسم خانة المدينة أو الإقليم",
+      "info": "💡 النص التوضيحي المكتوب فوق خانة اختيار أو كتابة مدينة الزبون.",
+      "default": "المدينة / الإقليم"
+    },
+    {
+      "type": "text",
+      "id": "submit_button_text",
+      "label": "نص زر تأكيد الطلب النهائي",
+      "info": "💡 الكلمة المكتوبة على زر تأكيد وإرسال الطلبية في أسفل الاستمارة (مثال: تأكيد الطلب أو اضغط هنا للشراء).",
+      "default": "تأكيد الطلب"
+    },
+    {
+      "type": "header",
+      "content": "🟢 الدعم العائم عبر الواتساب (Floating WhatsApp CTA)"
+    },
+    {
+      "type": "checkbox",
+      "id": "whatsapp_enabled",
+      "label": "تفعيل زر الواتساب العائم على الشاشة",
+      "info": "💡 عند تفعيله، ك تظهر أيقونة واتساب عائمة بأسفل الشاشة بتأثير نبض لطيف ك تجذب انتباه الزوار للاستفسار وحل اعتراضات الشراء.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_number",
+      "label": "رقم هاتف الواتساب (بالرمز الدولي الصحيح)",
+      "info": "⚠️ تنبيه هام جداً للمبتدئين: اكتب رقم هاتفك بالرمز الدولي المغربي وبدون علامة زائد (+) أو أصفار إضافية (مثال: اكتب 212600000000 عوض +2126... أو 06...). كتابة الرمز بشكل خاطئ ك يوقف عمل الزر بالكامل!",
+      "default": "212600000000"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_message",
+      "label": "رسالة الاستفسار التلقائية المجهزة للزبون",
+      "info": "💡 الرسالة اللي ك يلقاها الزبون واجدة مكتوبة في تطبيق واتساب ملي ك يضغط على الزر (مثال بالدارجة: السلام عليكم، بغيت نستفسر على مضخة الحليب اللاسلكية).",
+      "default": "السلام عليكم، بغيت نستفسر على مضخة الحليب اللاسلكية"
+    },
+    {
+      "type": "select",
+      "id": "whatsapp_position",
+      "label": "موقع أيقونة الواتساب على الشاشة",
+      "info": "💡 اختر واش بغيتي الأيقونة تظهر في يمين أو يسار شاشة الهاتف.",
+      "options": [
+        {
+          "value": "right",
+          "label": "الجهة اليمنى"
+        },
+        {
+          "value": "left",
+          "label": "الجهة اليسرى"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "header",
+      "content": "🌟 نافذة الاقتراح الحصري بعد الشراء (One-Click Audio Upsell)"
+    },
+    {
+      "type": "checkbox",
+      "id": "upsell_enabled",
+      "label": "تفعيل نافذة الاقتراح الإضافي بعد الشراء",
+      "info": "💡 عند تفعيلها، بمجرد ما يضغط الزبون على زر 'تأكيد الطلب'، ك تظهر ليه نافذة منبثقة تفاعلية ك تقترح عليه منتج تكميلي بلمسة واحدة بخصم خاص وقبل ما يمشي لصفحة الشكر النهائي.",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "upsell_title",
+      "label": "عنوان منتج الاقتراح الإضافي",
+      "info": "💡 اسم أو عنوان المنتج التكميلي اللي ك تقترحو كعرض إضافي خاص (مثال: مضخة يدوية إضافية للطوارئ).",
+      "default": "مضخة يدوية إضافية للطوارئ"
+    },
+    {
+      "type": "textarea",
+      "id": "upsell_description",
+      "label": "شرح وإقناع العرض (Pitch)",
+      "info": "💡 اكتب نص إقناعي صادق ك يشرح للزبونة أهمية هاد المنتج الإضافي وقيمة التوفير والخصم الحقيقي اللي غادي تحصل عليه.",
+      "default": "وفري كثر وزيدي هاد المضخة اليدوية الإضافية للشنطة ديالك بخصم حقيقي 40%!"
+    },
+    {
+      "type": "text",
+      "id": "upsell_price",
+      "label": "سعر منتج الاقتراح بالدرهم",
+      "info": "💡 السعر المخفض الحصري لمنتج الاقتراح بالدرهم المغربي (مثال: 149).",
+      "default": "149"
+    },
+    {
+      "type": "text",
+      "id": "upsell_compare_price",
+      "label": "السعر الأصلي للمقارنة بالدرهم",
+      "info": "💡 السعر الأصلي للشطب عليه وتوضيح نسبة التخفيض الحقيقية للمشتري (مثال: 249).",
+      "default": "249"
+    },
+    {
+      "type": "image_picker",
+      "id": "upsell_image",
+      "label": "صورة المنتج المقترح للعرض",
+      "info": "💡 ارفع صورة واضحة ومربعة للمنتج الإضافي المقترح."
+    },
+    {
+      "type": "text",
+      "id": "upsell_audio_url",
+      "label": "رابط مقطع الصوت الإرشادي (Voice Note)",
+      "info": "💡 🌟 نصيحة ذهبية للمبتدئين لزيادة المبيعات بشكل خرافي 🌟: سجل تسجيلاً صوتياً ودوداً وصادقاً بالدارجة المغربية ك تشرح فيه هاد العرض بصوتك وبكل أمانة (مثال: 'أهلاً أختي، شكراً على الطلب ديالك... بغيت نقترح عليك هاد العرض الخاص...'). ارفع الملف الصوتي في لوحة تحكم شوبيفاي (Content ثم Files)، وانسخ رابط الملف الصقو هنا. سيتم تشغيل الصوت للزبون تلقائياً فور ظهور العرض لإقناعها وزيادة الأرباح!",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "upsell_yes_btn",
+      "label": "نص زر القبول والتأكيد",
+      "info": "💡 النص المكتوب على زر القبول وإضافة العرض مباشرة إلى سلة الطلب الإجمالية بنقرة واحدة.",
+      "default": "نعم، أريد إضافة هذا العرض للطلب الخاص بي"
+    },
+    {
+      "type": "text",
+      "id": "upsell_no_btn",
+      "label": "نص زر الرفض والتخطي",
+      "info": "💡 النص المكتوب على زر الرفض لتجاوز العرض والذهاب مباشرة لصفحة الشكر النهائي.",
+      "default": "لا شكراً، لا أريد"
+    },
+    {
+      "type": "text",
+      "id": "upsell_variant_id",
+      "label": "معرف Variant للمنتج المقترح (Variant ID)",
+      "info": "💡 اكتب هنا معرف الـ Variant للمنتج المقترح لكي يتمكن شوبيفاي من إضافته تلقائياً لسلة الشراء وعمل الـ Upsell بنجاح.",
+      "default": ""
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bundle_card",
+      "name": "كارت عرض التوفير (Bundle Card)",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "عنوان عرض التوفير (Title)",
+          "info": "💡 اسم كارت العرض (مثال: قطعتين أو عرض التوفير الممتاز).",
+          "default": "2 قطع"
+        },
+        {
+          "type": "text",
+          "id": "qty",
+          "label": "الكمية (Quantity)",
+          "info": "💡 الكمية الحقيقية (عدد القطع) اللي ك تسجل في طلبيات شوبيفاي وتطبيقات الـ COD عند اختيار هاد الكارت.",
+          "default": "2"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "السعر النهائي بالدرهم (Price)",
+          "info": "💡 السعر النهائي الإجمالي للباك كامل بالدرهم المغربي (مثال: 329).",
+          "default": "329"
+        },
+        {
+          "type": "text",
+          "id": "compare_at_price",
+          "label": "السعر الأصلي قبل التخفيض بالدرهم",
+          "info": "💡 السعر الأصلي قبل التخفيض للشطب عليه وإبراز نسبة التوفير الحقيقية للزبون.",
+          "default": "438"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "شارة أعلى الكارت (Top Badge)",
+          "info": "💡 شارة مميزة تظهر ملتصقة في أعلى الكارت لإبرازه وجذب الانتباه (مثال: الأكثر طلباً أو أفضل عرض).",
+          "default": "الأكثر طلباً"
+        },
+        {
+          "type": "text",
+          "id": "discount_badge",
+          "label": "شارة التخفيض بجانب العنوان (Discount Badge)",
+          "info": "💡 شارة تخفيض ملونة تظهر بجانب عنوان الباك مباشرة (مثال: وفري 109 درهم).",
+          "default": "وفري 109 درهم"
+        },
+        {
+          "type": "text",
+          "id": "sub_text",
+          "label": "نص توضيحي فرعي (Subtext)",
+          "info": "💡 نص توضيحي فرعي مفيد للزبون (مثال: 164.50 درهم / القطعة أو التوصيل فابور).",
+          "default": "164.50 درهم / القطعة"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "صورة مخصصة للباك (Bundle Image)",
+          "info": "💡 صورة مصغرة خاصة بهاد العرض. إذا خليتيها خاوية غادي يستعمل صورة المنتج الرئيسية تلقائياً."
+        },
+        {
+          "type": "checkbox",
+          "id": "is_active",
+          "label": "تحديد العرض تلقائياً (Preselect on load?)",
+          "info": "💡 عند تفعيله، سيتم اختيار هاد الباك بشكل نشط وتلقائي فور دخول الزبون لصفحة الهبوط.",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Main Section",
+      "blocks": [
+        {
+          "type": "bundle_card",
+          "settings": {
+            "title": "1 قطعة",
+            "qty": "1",
+            "price": "219",
+            "compare_at_price": "",
+            "badge": "",
+            "discount_badge": "",
+            "sub_text": "219 درهم / القطعة",
+            "is_active": false
+          }
+        },
+        {
+          "type": "bundle_card",
+          "settings": {
+            "title": "2 قطع",
+            "qty": "2",
+            "price": "329",
+            "compare_at_price": "438",
+            "badge": "الأكثر طلباً",
+            "discount_badge": "وفري 109 درهم",
+            "sub_text": "164.50 درهم / القطعة",
+            "is_active": true
+          }
+        },
+        {
+          "type": "bundle_card",
+          "settings": {
+            "title": "3 قطع",
+            "qty": "3",
+            "price": "449",
+            "compare_at_price": "657",
+            "badge": "أفضل عرض",
+            "discount_badge": "وفري 208 درهم",
+            "sub_text": "149.67 درهم / القطعة",
+            "is_active": false
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

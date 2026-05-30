@@ -1,0 +1,201 @@
+{%- if section.settings.show_announcement -%}
+  <div id="AnnouncementBar-{{ section.id }}" class="marquee-announcement-bar" {{ section.shopify_attributes }}>
+    <div class="marquee-inner">
+      <div class="marquee-content marquee-speed-{{ section.settings.scroll_speed }}">
+        {%- for i in (1..3) -%} <!-- Loop three times for seamless repeating -->
+          <div class="marquee-group">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'announcement_item' -%}
+                <span class="marquee-item" {{ block.shopify_attributes }}>
+                  {{ block.settings.text }}
+                </span>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+
+  <style>
+    #AnnouncementBar-{{ section.id }} {
+      background-color: {{ section.settings.bg_color }};
+      color: {{ section.settings.text_color }};
+      font-size: {{ section.settings.font_size }}px;
+      padding: 12px 0;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      z-index: 99999;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+    }
+    
+    .marquee-inner {
+      display: flex;
+      width: 100%;
+      overflow: hidden;
+    }
+    
+    .marquee-content {
+      display: flex;
+      white-space: nowrap;
+      animation: marqueeScroll 25s linear infinite;
+    }
+    
+    .marquee-content:hover {
+      animation-play-state: paused;
+    }
+    
+    .marquee-group {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-shrink: 0;
+    }
+    
+    /* Dynamic speeds */
+    .marquee-speed-fast {
+      animation-duration: 15s;
+    }
+    .marquee-speed-medium {
+      animation-duration: 28s;
+    }
+    .marquee-speed-slow {
+      animation-duration: 48s;
+    }
+    
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      padding: 0 {{ section.settings.gap }}px;
+      font-weight: 700;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    
+    @keyframes marqueeScroll {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+      100% {
+        transform: translate3d(-33.3333%, 0, 0);
+      }
+    }
+  </style>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Scrolling Announcement Bar",
+  "settings": [
+    {
+      "type": "header",
+      "content": "📢 إعدادات شريط الإعلانات الدوار"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "تفعيل شريط الإعلانات في أعلى الصفحة",
+      "info": "💡 يمكنك إظهار أو إخفاء شريط الإعلان المنساب في أعلى المتجر بضغطة زر واحدة.",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "لون خلفية الشريط الإعلاني",
+      "info": "💡 اختر لوناً لافتاً وجذاباً يتماشى مع الهوية البصرية لمتجرك (مثال: الأحمر الداكن أو الوردي).",
+      "default": "#ef4a65"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "لون نصوص شريط الإعلانات",
+      "info": "💡 لون نص الإعلانات المكتوبة داخل الشريط (ينصح باللون الأبيض لضمان سهولة القراءة على الهواتف).",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "حجم خط الإعلانات",
+      "info": "💡 التحكم في حجم الخط ليكون مناسباً لجميع الهواتف ومقروءاً بوضوح تامات.",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "scroll_speed",
+      "label": "سرعة انسياب ودوران نصوص الشريط",
+      "info": "💡 اختر سرعة حركة الشريط. ننصح بالسرعة المتوسطة (medium) أو البطيئة لتسهيل القراءة وتجنب إزعاج الزوار.",
+      "options": [
+        {
+          "value": "fast",
+          "label": "حركة سريعة"
+        },
+        {
+          "value": "medium",
+          "label": "حركة متوسطة (منصوح بها)"
+        },
+        {
+          "value": "slow",
+          "label": "حركة بطيئة وهادئة"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "المسافة الفاصلة بين الجمل الإعلانية",
+      "info": "💡 المسافة الفاصلة بالبكسل بين كل إعلان وإعلان لمنع تداخل النصوص والكلمات أثناء الحركة الدائرية.",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "announcement_item",
+      "name": "إعلان مخصص (Announcement)",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "نص الإعلان المنساب",
+          "info": "💡 اكتب عبارة إعلانية قصيرة ومقنعة (مثال بالدارجة المغربية: 🚚 التوصيل فابور فالمغرب + الدفع عند الاستلام 🤝).",
+          "default": "🚚 شحن مجاني وسريع لكاع المدن المغربية"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scrolling Announcement Bar",
+      "blocks": [
+        {
+          "type": "announcement_item",
+          "settings": {
+            "text": "🚚 شحن مجاني وسريع لكاع المدن المغربية 🇲🇦"
+          }
+        },
+        {
+          "type": "announcement_item",
+          "settings": {
+            "text": "🤝 الدفع عند الاستلام والتوصيل حتى لباب الدار"
+          }
+        },
+        {
+          "type": "announcement_item",
+          "settings": {
+            "text": "🔄 ضمان الاسترجاع والتبديل متوفر لمدة 60 يوم فابور"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

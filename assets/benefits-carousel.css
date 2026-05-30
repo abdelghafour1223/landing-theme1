@@ -1,0 +1,162 @@
+/* ============================================================
+   Benefits Carousel — Infinite Scrolling Ticker Strip
+   Matches .helps-with-carousel__* class structure
+   ============================================================ */
+
+/* ── Wrapper ─────────────────────────────────────────────── */
+.helps-with-carousel__container {
+  width: 100%;
+  overflow: hidden;
+  background: var(--color-main-accent, #ef4a65);
+  padding: 14px 0;
+  position: relative;
+}
+
+/* Fade edges */
+.helps-with-carousel__container::before,
+.helps-with-carousel__container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 80px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+.helps-with-carousel__container::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-main-accent, #ef4a65), transparent);
+}
+.helps-with-carousel__container::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-main-accent, #ef4a65), transparent);
+}
+
+/* ── Heading (hidden visually when used as pure ticker) ───── */
+.helps-with-carousel__heading {
+  display: none;
+}
+
+/* ── Benefits strip ──────────────────────────────────────── */
+.helps-with-carousel__benefits {
+  width: 100%;
+  overflow: hidden;
+}
+
+.helps-with-carousel__track-container {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+}
+
+.helps-with-carousel__track {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  white-space: nowrap;
+  animation: benefits-scroll 28s linear infinite;
+  will-change: transform;
+}
+
+/* Pause on hover */
+.helps-with-carousel__container:hover .helps-with-carousel__track {
+  animation-play-state: paused;
+}
+
+/* ── Individual item ─────────────────────────────────────── */
+.helps-with-carousel__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 28px;
+  color: #ffffff;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Separator dot between items */
+.helps-with-carousel__item::after {
+  content: '•';
+  position: absolute;
+  right: -4px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* ── Icon ────────────────────────────────────────────────── */
+.helps-with-carousel__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  color: #ffffff;
+}
+
+.helps-with-carousel__icon svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+/* ── Text ────────────────────────────────────────────────── */
+.helps-with-carousel__text {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ── Scroll animation ────────────────────────────────────── */
+@keyframes benefits-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+/* ── RTL support ─────────────────────────────────────────── */
+[dir="rtl"] .helps-with-carousel__track {
+  animation: benefits-scroll-rtl 28s linear infinite;
+}
+
+[dir="rtl"] .helps-with-carousel__container:hover .helps-with-carousel__track {
+  animation-play-state: paused;
+}
+
+@keyframes benefits-scroll-rtl {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(33.333%); }
+}
+
+/* ── Reduced motion ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .helps-with-carousel__track {
+    animation: none;
+  }
+  .helps-with-carousel__track-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ── Mobile ──────────────────────────────────────────────── */
+@media screen and (max-width: 749px) {
+  .helps-with-carousel__container {
+    padding: 12px 0;
+  }
+
+  .helps-with-carousel__item {
+    padding: 0 20px;
+    font-size: 13px;
+    gap: 6px;
+  }
+
+  .helps-with-carousel__icon,
+  .helps-with-carousel__icon svg {
+    width: 18px;
+    height: 18px;
+  }
+}

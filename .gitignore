@@ -1,0 +1,7 @@
+*.zip
+check_zip.ps1
+create_zip.ps1
+.DS_Store
+Thumbs.db
+node_modules/
+.shopify/
