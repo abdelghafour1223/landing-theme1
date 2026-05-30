@@ -1,11 +1,6 @@
 [
   {
     "name": "Theme settings",
-    "theme_name": "Custom Dynamic Landing Theme",
-    "theme_version": "1.0.0",
-    "theme_author": "Antigravity",
-    "theme_documentation_url": "https://github.com",
-    "theme_support_url": "https://github.com",
     "settings": [
       {
         "type": "header",
@@ -55,8 +50,7 @@
       {
         "type": "color_background",
         "id": "gradient_accent_1",
-        "label": "Accent 1 gradient",
-        "default": ""
+        "label": "Accent 1 gradient"
       },
       {
         "type": "color",
@@ -67,8 +61,7 @@
       {
         "type": "color_background",
         "id": "gradient_accent_2",
-        "label": "Accent 2 gradient",
-        "default": ""
+        "label": "Accent 2 gradient"
       },
       {
         "type": "header",
@@ -105,8 +98,7 @@
       {
         "type": "color_background",
         "id": "gradient_background_1",
-        "label": "Background 1 gradient",
-        "default": ""
+        "label": "Background 1 gradient"
       },
       {
         "type": "color",
@@ -117,8 +109,7 @@
       {
         "type": "color_background",
         "id": "gradient_background_2",
-        "label": "Background 2 gradient",
-        "default": ""
+        "label": "Background 2 gradient"
       }
     ]
   },

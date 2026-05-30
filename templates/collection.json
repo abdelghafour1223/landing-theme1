@@ -1,5 +1,17 @@
 {
   "name": "Collection",
-  "sections": {},
-  "order": []
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {}
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {}
+    }
+  },
+  "order": [
+    "banner",
+    "product-grid"
+  ]
 }

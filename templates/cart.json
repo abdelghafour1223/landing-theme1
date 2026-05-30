@@ -1,5 +1,17 @@
 {
   "name": "Cart",
-  "sections": {},
-  "order": []
+  "sections": {
+    "main": {
+      "type": "main-cart-items",
+      "settings": {}
+    },
+    "subtotal": {
+      "type": "main-cart-footer",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "subtotal"
+  ]
 }
