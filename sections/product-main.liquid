@@ -1,4 +1,13 @@
-{%- assign product = product | default: collections.all.products.first -%}
+{%- assign selected_product = all_products[section.settings.featured_product] | default: product -%}
+{%- if selected_product == blank or selected_product.gift_card? -%}
+  {%- for p in collections.all.products -%}
+    {%- unless p.gift_card? -%}
+      {%- assign selected_product = p -%}
+      {%- break -%}
+    {%- endunless -%}
+  {%- endfor -%}
+{%- endif -%}
+{%- assign product = selected_product | default: collections.all.products.first -%}
 
 <style>
   .order-submit-btn,
@@ -1314,6 +1323,11 @@
 {
   "name": "Product Main Section",
   "settings": [
+    {
+      "type": "product",
+      "id": "featured_product",
+      "label": "المنتج المعروض على صفحة الهبوط"
+    },
     {
       "type": "header",
       "content": "دليل المظهر والألوان"
