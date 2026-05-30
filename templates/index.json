@@ -1,12 +1,210 @@
 {
   "name": "index",
   "sections": {
-    "announcement": {
-      "type": "announcement-bar",
-      "settings": {}
+    "product_main": {
+      "type": "product-main",
+      "blocks": {
+        "bundle_card_1": {
+          "type": "bundle_card",
+          "settings": {
+            "title": "1 قطعة",
+            "qty": "1",
+            "price": "219",
+            "compare_at_price": "",
+            "badge": "",
+            "discount_badge": "",
+            "sub_text": "219 درهم / القطعة",
+            "is_active": false
+          }
+        },
+        "bundle_card_2": {
+          "type": "bundle_card",
+          "settings": {
+            "title": "2 قطع",
+            "qty": "2",
+            "price": "329",
+            "compare_at_price": "438",
+            "badge": "الأكثر طلباً",
+            "discount_badge": "وفري 109 درهم",
+            "sub_text": "164.50 درهم / القطعة",
+            "is_active": true
+          }
+        },
+        "bundle_card_3": {
+          "type": "bundle_card",
+          "settings": {
+            "title": "3 قطع",
+            "qty": "3",
+            "price": "449",
+            "compare_at_price": "657",
+            "badge": "أفضل عرض",
+            "discount_badge": "وفري 208 درهم",
+            "sub_text": "149.67 درهم / القطعة",
+            "is_active": false
+          }
+        }
+      },
+      "block_order": [
+        "bundle_card_1",
+        "bundle_card_2",
+        "bundle_card_3"
+      ],
+      "settings": {
+        "button_bg_color": "#ef4a65",
+        "button_text_color": "#ffffff",
+        "accent_color": "#cb6387",
+        "accent_color_light": "#fff5f7",
+        "form_heading": "عمر الاستمارة للطلب و التوصيل فابور",
+        "name_label": "الاسم الكامل",
+        "phone_label": "رقم الهاتف",
+        "address_label": "العنوان الكامل",
+        "city_label": "المدينة / الإقليم",
+        "submit_button_text": "تأكيد الطلب",
+        "whatsapp_enabled": true,
+        "whatsapp_number": "+212600000000",
+        "whatsapp_message": "السلام عليكم، بغيت نستفسر على مضخة الحليب اللاسلكية",
+        "whatsapp_position": "right",
+        "upsell_enabled": true,
+        "upsell_title": "مضخة يدوية إضافية للطوارئ 🍼",
+        "upsell_description": "وفري كثر وزيدي هاد المضخة اليدوية الإضافية للشنطة ديالك بخصم حقيقي 40%!",
+        "upsell_price": "149",
+        "upsell_compare_price": "249",
+        "upsell_audio_url": "",
+        "upsell_yes_btn": "نعم، أريد إضافة هذا العرض للطلب الخاص بي",
+        "upsell_no_btn": "لا شكراً، لا أريد"
+      }
+    },
+    "product_benefits": {
+      "type": "product-benefits",
+      "settings": {
+        "heading": "Product Benefits"
+      }
+    },
+    "divider_1": {
+      "type": "section-divider-1",
+      "settings": {
+        "heading": "Divider 1"
+      }
+    },
+    "before_after_comparison": {
+      "type": "before-after-comparison",
+      "settings": {
+        "heading": "Before After Comparison"
+      }
+    },
+    "image_with_text": {
+      "type": "image-with-text",
+      "settings": {
+        "heading": "Image With Text"
+      }
+    },
+    "product_roadmap": {
+      "type": "product-roadmap",
+      "settings": {
+        "heading": "Product Roadmap"
+      }
+    },
+    "product_steps": {
+      "type": "product-steps",
+      "settings": {
+        "heading": "Product Steps"
+      }
+    },
+    "divider_2": {
+      "type": "section-divider-2",
+      "settings": {
+        "heading": "Divider 2"
+      }
+    },
+    "statistics_column": {
+      "type": "statistics-column",
+      "settings": {
+        "heading": "Statistics Column"
+      }
+    },
+    "benefits_carousel": {
+      "type": "benefits-carousel",
+      "settings": {
+        "heading": "Benefits Carousel"
+      }
+    },
+    "customer_reviews_carousel": {
+      "type": "customer-reviews-carousel",
+      "settings": {
+        "heading": "Customer Reviews Carousel"
+      }
+    },
+    "faq_accordion": {
+      "type": "faq-accordion",
+      "settings": {
+        "heading": "FAQ Accordion"
+      }
+    },
+    "order_journey": {
+      "type": "order-journey",
+      "blocks": {
+        "step_1": {
+          "type": "step_item",
+          "settings": {
+            "title": "تأكيد الطلب الهاتفي 📞",
+            "content": "مباشرة مورا ما كتعمر الاستمارة، كيتصل بيك فريق الدعم ديالنا باش يأكد معاك العنوان ومقاسات الطلب بكل أمانة وشفافية."
+          }
+        },
+        "step_2": {
+          "type": "step_item",
+          "settings": {
+            "title": "تغليف وتوصيل سريع فابور 🚚",
+            "content": "كنغلفو المنتج ديالك بعناية وكنسلموه للموزع الخاص بنا لي كيجيبو ليك حتى لباب الدار في ظرف 24 إلى 48 ساعة والتوصيل ديما فابور!"
+          }
+        },
+        "step_3": {
+          "type": "step_item",
+          "settings": {
+            "title": "تفحص الأمانة وخلص 🤝",
+            "content": "ملي يوصلك الموزع، تفحص المضخة وشوف الجودة ديالها مزيان عاد خلص. الدفع ديما عند الاستلام والتأكد 100%!"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
+      "settings": {
+        "bg_color": "#f9f9f9",
+        "text_color": "#121212",
+        "accent_color": "#cb6387",
+        "title": "رحلة طلبك (كيفاش كتوصلك الأمانة؟) 🚚"
+      }
+    },
+    "satisfaction_guarantee": {
+      "type": "satisfaction-guarantee",
+      "settings": {
+        "heading": "Satisfaction Guarantee"
+      }
+    },
+    "judge_me_reviews": {
+      "type": "judge-me-reviews",
+      "settings": {
+        "heading": "Judge Me Reviews"
+      }
     }
   },
   "order": [
-    "announcement"
+    "product_main",
+    "product_benefits",
+    "divider_1",
+    "before_after_comparison",
+    "image_with_text",
+    "product_roadmap",
+    "product_steps",
+    "divider_2",
+    "statistics_column",
+    "benefits_carousel",
+    "customer_reviews_carousel",
+    "faq_accordion",
+    "order_journey",
+    "satisfaction_guarantee",
+    "judge_me_reviews"
   ]
 }
