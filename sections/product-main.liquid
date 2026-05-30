@@ -1318,6 +1318,156 @@
 })();
 </script>
 
+{%- if section.settings.sticky_button_enabled -%}
+  <!-- Sticky Order Button for Mobile -->
+  <div id="sticky-order-btn" style="display: none;">
+    <button id="sticky-order-btn-inner" onclick="stickyOrderScroll()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+      </svg>
+      {{ section.settings.sticky_button_text | default: "أطلب الآن (التوصيل فابور)" }}
+    </button>
+  </div>
+
+  <style>
+    /* ===== MOBILE STICKY BOTTOM BUTTON ===== */
+    #sticky-order-btn {
+      position: fixed !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      z-index: 99999 !important;
+      padding: 12px 16px !important;
+      background: linear-gradient(to top, rgba(255,255,255,0.98) 60%, transparent) !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      transition: transform 0.35s ease, opacity 0.35s ease !important;
+    }
+    
+    #sticky-order-btn-inner {
+      width: 100% !important;
+      max-width: 480px !important;
+      background: {{ section.settings.button_bg_color }} !important;
+      color: {{ section.settings.button_text_color }} !important;
+      border: none !important;
+      border-radius: 40px !important;
+      padding: 16px 24px !important;
+      font-size: 18px !important;
+      font-weight: 700 !important;
+      cursor: pointer !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 10px !important;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25) !important;
+      letter-spacing: -0.3px !important;
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease, background 0.25s ease !important;
+      animation: premium-pulse 2s infinite ease-in-out !important;
+    }
+    
+    #sticky-order-btn-inner:hover {
+      transform: translateY(-2px) scale(1.02) !important;
+      box-shadow: 0 8px 25px rgba(203, 99, 135, 0.4) !important;
+      background: {{ section.settings.button_bg_color }} !important;
+      filter: brightness(0.95) !important;
+    }
+    
+    #sticky-order-btn-inner:active {
+      transform: translateY(0) scale(0.97) !important;
+      box-shadow: 0 4px 12px rgba(25, 27, 29, 0.2) !important;
+    }
+    
+    @keyframes premium-pulse {
+      0% {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      }
+      50% {
+        box-shadow: 0 6px 30px rgba(203, 99, 135, 0.50);
+        transform: scale(1.015);
+      }
+      100% {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      body {
+        padding-bottom: 80px !important;
+      }
+      #sticky-order-btn {
+        display: flex !important;
+      }
+    }
+    
+    @media (min-width: 769px) {
+      #sticky-order-btn {
+        display: none !important;
+      }
+    }
+  </style>
+
+  <script>
+  (function() {
+    var stickyBtn = document.getElementById('sticky-order-btn');
+    var formSection = document.querySelector('.offer-bundle-inline');
+
+    if (stickyBtn) {
+      // Display logic: show on mobile
+      if (window.innerWidth <= 768) {
+        stickyBtn.style.display = 'flex';
+      }
+      window.addEventListener('resize', function() {
+        if (window.innerWidth <= 768) {
+          stickyBtn.style.display = 'flex';
+        } else {
+          stickyBtn.style.display = 'none';
+        }
+      });
+
+      {%- unless request.design_mode -%}
+      // Hide sticky button when checkout form is visible in live view
+      if (formSection) {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              // Form is visible -> hide sticky button
+              stickyBtn.style.transform = 'translateY(120%)';
+              stickyBtn.style.opacity = '0';
+              stickyBtn.style.pointerEvents = 'none';
+            } else {
+              // Form not visible -> show sticky button
+              stickyBtn.style.transform = 'translateY(0)';
+              stickyBtn.style.opacity = '1';
+              stickyBtn.style.pointerEvents = 'auto';
+            }
+          });
+        }, { threshold: 0.1 });
+
+        observer.observe(formSection);
+      }
+      {%- else -%}
+      // In shopify editor design mode, make it always visible inside the mobile iframe preview
+      stickyBtn.style.transform = 'translateY(0)';
+      stickyBtn.style.opacity = '1';
+      stickyBtn.style.pointerEvents = 'auto';
+      {%- endunless -%}
+    }
+  })();
+
+  function stickyOrderScroll() {
+    var target = document.querySelector('.offer-bundle-inline');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Focus first input after scroll
+      setTimeout(function() {
+        var firstInput = document.getElementById('fullName');
+        if (firstInput) firstInput.focus();
+      }, 750);
+    }
+  }
+  </script>
+{%- endif -%}
 
 {% schema %}
 {
@@ -1327,6 +1477,18 @@
       "type": "product",
       "id": "featured_product",
       "label": "المنتج المعروض على صفحة الهبوط"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_button_enabled",
+      "label": "تفعيل زر الطلب المثبت في أسفل الشاشة على الهاتف",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sticky_button_text",
+      "label": "نص زر الطلب المثبت",
+      "default": "أطلب الآن (التوصيل فابور)"
     },
     {
       "type": "header",
