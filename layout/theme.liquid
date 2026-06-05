@@ -30,18 +30,9 @@
   <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
 
   <!-- Base Custom Font & Shopify styles -->
-  {{ 'custom-font.css' | asset_url | stylesheet_tag }}
+  {{ 'typography-combined.css' | asset_url | stylesheet_tag }}
   {{ 'base.css' | asset_url | stylesheet_tag }}
-  {{ 'custom-product-grid.css' | asset_url | stylesheet_tag }}
-  {{ 'card-media-fix.css' | asset_url | stylesheet_tag }}
-  {{ 'universal-font-fix.css' | asset_url | stylesheet_tag }}
   {{ 'button-styling.css' | asset_url | stylesheet_tag }}
-  {{ 'app-typography-fix.css' | asset_url | stylesheet_tag }}
-  {{ 'global-headings.css' | asset_url | stylesheet_tag }}
-  {{ 'accent-typography.css' | asset_url | stylesheet_tag }}
-  {{ 'selective-heading-fonts.css' | asset_url | stylesheet_tag }}
-  {{ 'size-chart.css' | asset_url | stylesheet_tag }}
-  {{ 'typography-system.css' | asset_url | stylesheet_tag }}
 
   <!-- jQuery & Slick (For dynamic gallery/carousels) -->
   <script src="{{ 'jquery.min.js' | asset_url }}" defer="defer"></script>
@@ -54,7 +45,6 @@
   {{ 'theme-variables.css' | asset_url | stylesheet_tag }}
   {{ 'enhanced-buttons.css' | asset_url | stylesheet_tag }}
   {{ 'components.css' | asset_url | stylesheet_tag }}
-  {{ 'offer-bundle.css' | asset_url | stylesheet_tag }}
 
   <!-- Dynamic Shopify header hooks -->
   {{ content_for_header }}
@@ -76,7 +66,6 @@
   <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'faq-accordion.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'guarantee-scroll.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'offer-bundle.js' | asset_url }}" defer="defer"></script>
 
   <!-- Video IntersectionObserver script -->
   <script>

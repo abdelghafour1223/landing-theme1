@@ -4,9 +4,12 @@ document.addEventListener('DOMContentLoaded', function() {
   guaranteeButtons.forEach(button => {
     button.addEventListener('click', function(e) {
       e.preventDefault();
-      const target = document.querySelector('#offer-bundle-section');
+      const target = document.querySelector('[id^="ProductNativePurchase-"]') || 
+                     document.querySelector('.product__info-container') ||
+                     document.querySelector('.product-form') ||
+                     document.querySelector('#offer-bundle-section');
       if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
   });

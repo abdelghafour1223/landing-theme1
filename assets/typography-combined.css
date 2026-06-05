@@ -1,0 +1,517 @@
+/* Combined Typography & Font Override Stylesheets for Performance Optimization */
+
+/* 1. custom-font.css */
+@import "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap";
+:root {
+  --font-body-family-override: var(--font-body-family, "Inter", sans-serif);
+  --font-heading-family-override: var(--font-heading-family, "Inter", sans-serif);
+  --font-body-weight-override: var(--font-body-weight, 400);
+  --font-body-weight-bold-override: var(--font-body-weight-bold, 700);
+  --font-heading-weight-override: var(--font-weight-bold, 600);
+}
+body, p, .text-body, button, input, select, textarea {
+  font-family: var(--font-body-family-override);
+  letter-spacing: var(--letter-spacing-body, -.3px);
+}
+h1, h2, h3, h4, h5, h6, .h0, .h1, .h2, .h3, .h4, .h5, .h6, .hxl, .hxxl {
+  font-family: var(--font-heading-family-override);
+  letter-spacing: var(--letter-spacing-heading, -.3px);
+}
+.announcement-bar__message, .button, .quantity__input, .field__input, .select__select, .form__label, .caption, .caption-with-letter-spacing, .price, .product__title, .product-form__input, .product-form label, .cart-items, .cart__footer, .cart__note, .customer, .article, .article__content, .newsletter__form, .pagination, .footer, .footer__blocks, .footer__content-top, .footer__content-bottom, .localization-form, .header, .header__menu-item, .header__submenu, .predictive-search, .collection, .collection-hero, .facets, .product-grid {
+  font-family: var(--font-body-family-override);
+  letter-spacing: var(--letter-spacing-body);
+}
+.caption-with-letter-spacing, .caption-large, .subtitle {
+  letter-spacing: var(--letter-spacing-body);
+}
+
+/* 2. app-typography-fix.css */
+.shopify-app-block, .shopify-buy-frame, div[data-shopify-app], div[data-app-id], div[class*=app-], div[class*=App], #bundle-container, #bundle-app, [data-bundle-app], .bundle-builder, #ReCharge, [data-rebuy-id], [data-rebuy-container], [data-bold-bundle], [data-loyalty-container], [data-quickview], [data-sm-buy], [data-judge-me], #judgeme_product_reviews, .shopify-app-block *, .shopify-buy-frame *, div[data-shopify-app] *, div[data-app-id] *, div[class*=app-] *, div[class*=App] *, #bundle-container *, #bundle-app *,[data-bundle-app] *, .bundle-builder *, #ReCharge *, [data-rebuy-id] *, [data-rebuy-container] *, [data-bold-bundle] *, [data-loyalty-container] *, [data-quickview] *, [data-sm-buy] *, [data-judge-me] *, #judgeme_product_reviews * {
+  --letter-spacing-heading: var(--app-letter-spacing, var(--letter-spacing-body)) !important;
+  letter-spacing: var(--app-letter-spacing, var(--letter-spacing-body)) !important;
+}
+iframe[src*=app], iframe[src*=bundle], iframe[src*=recharge], iframe[src*=rebuy], iframe[src*=loyalty] {
+  --letter-spacing-heading: var(--app-letter-spacing, var(--letter-spacing-body)) !important;
+}
+[class*=bundle], [class*=Bundle], [class*=subscription], [class*=Subscription], [class*=rebuy], [class*=Rebuy], [class*=recharge], [class*=Recharge], [class*=quickview], [class*=Quickview] {
+  --letter-spacing-heading: var(--app-letter-spacing, var(--letter-spacing-body)) !important;
+  letter-spacing: var(--app-letter-spacing, var(--letter-spacing-body)) !important;
+}
+[style*=letter-spacing] {
+  letter-spacing: var(--app-letter-spacing, var(--letter-spacing-body)) !important;
+}
+
+/* 3. universal-font-fix.css */
+h1, h2, h3, h4, h5, h6, .title, .heading, [class*=title], [class*=heading], .collection-hero__title, .main-collection-title, .page-title, .section-header__title {
+  font-family: var(--font-heading-family-override, var(--font-heading-family));
+  font-weight: var(--font-weight-bold-override, bold);
+  letter-spacing: var(--letter-spacing-heading, -.3px);
+}
+.collection-hero__title {
+  font-family: var(--font-heading-family-override, var(--font-heading-family));
+  font-weight: var(--font-weight-bold-override, bold);
+  letter-spacing: var(--letter-spacing-heading, -.3px);
+  margin-top: 0;
+}
+.title-wrapper-with-link .title, .title-wrapper .title, .section-header__title {
+  font-family: var(--font-heading-family-override, var(--font-heading-family));
+  font-weight: var(--font-weight-bold-override, bold);
+  letter-spacing: var(--letter-spacing-heading, -.3px);
+}
+.card-information .card__heading {
+  font-family: var(--font-heading-family-override, var(--font-heading-family));
+  font-weight: var(--font-weight-bold-override, bold);
+  letter-spacing: var(--letter-spacing-heading, -.3px);
+  font-size: 15px;
+}
+
+/* 4. global-headings.css */
+h1, h2, h3, h4, h5, .h0, .h1, .h2, .h3, .h4, .h5 {
+  color: rgb(var(--color-text));
+  font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-heading);
+  line-height: calc(1 + .3 / var(--font-heading-scale));
+  margin: 0;
+}
+h1, .h1 { font-size: calc(var(--font-heading-scale) * 3.2rem); }
+h2, .h2 { font-size: calc(var(--font-heading-scale) * 2.6rem); }
+h3, .h3 { font-size: calc(var(--font-heading-scale) * 2.2rem); }
+h4, .h4 { font-size: calc(var(--font-heading-scale) * 1.8rem); }
+h5, .h5 { font-size: calc(var(--font-heading-scale) * 1.6rem); }
+.h0 { font-size: calc(var(--font-heading-scale) * 3.8rem); }
+.hxl { font-size: calc(var(--font-heading-scale) * 4.2rem); }
+.hxxl { font-size: calc(var(--font-heading-scale) * 5rem); }
+@media screen and (min-width: 750px) {
+  h1, .h1 { font-size: calc(var(--font-heading-scale) * 3.6rem); }
+  h2, .h2 { font-size: calc(var(--font-heading-scale) * 3rem); }
+  h3, .h3 { font-size: calc(var(--font-heading-scale) * 2.4rem); }
+  h4, .h4 { font-size: calc(var(--font-heading-scale) * 2rem); }
+  h5, .h5 { font-size: calc(var(--font-heading-scale) * 1.8rem); }
+  .h0 { font-size: calc(var(--font-heading-scale) * 4.6rem); }
+  .hxl { font-size: calc(var(--font-heading-scale) * 5.2rem); }
+  .hxxl { font-size: calc(var(--font-heading-scale) * 6rem); }
+}
+.email-signup-banner__heading {
+  color: rgb(var(--color-text));
+  font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-heading);
+  line-height: calc(1 + .3 / var(--font-heading-scale));
+}
+.password-main .newsletter__subheading {
+  color: rgb(var(--color-text));
+  letter-spacing: var(--letter-spacing-body);
+  font-family: var(--font-body-family);
+  font-style: var(--font-body-style);
+  font-weight: var(--font-body-weight);
+}
+.shopify-section-template--17905978671257__main .email-signup-banner__box {
+  color: rgb(var(--color-text));
+  font-family: var(--font-body-family);
+  font-style: var(--font-body-style);
+  font-weight: var(--font-body-weight);
+  letter-spacing: var(--letter-spacing-body);
+}
+.password-main .newsletter__wrapper {
+  background-color: var(--global-section-bg-color);
+}
+.password-main .newsletter__wrapper.email-signup-banner__box {
+  color: rgb(var(--color-text));
+}
+.newsletter__wrapper input.field__input {
+  color: rgb(var(--color-text));
+  background-color: var(--global-section-bg-color);
+  border-color: rgba(var(--color-foreground), .3);
+}
+.newsletter__wrapper input.field__input:focus {
+  color: rgb(var(--color-text));
+}
+.newsletter__wrapper .newsletter-form__button {
+  color: rgb(var(--color-button-text));
+  background-color: rgb(var(--color-button));
+}
+.newsletter__wrapper .field__label {
+  color: var(--global-section-text-color);
+}
+
+/* 5. accent-typography.css */
+:root {
+  --accent-debug: var(--font-accent-family, "ACCENT_FONT_NOT_SET");
+}
+.accent-font, body .accent-font, html .accent-font, .shopify-section .accent-font {
+  font-family: var(--font-accent-family, var(--font-body-family)) !important;
+  font-style: var(--font-accent-style, normal) !important;
+  font-weight: var(--font-accent-weight, 400) !important;
+  letter-spacing: var(--font-accent-letter-spacing, 0px) !important;
+  text-transform: var(--font-accent-text-transform, none) !important;
+}
+.new-hero-accent-text.accent-font, .custom-hero .new-hero-accent-text.accent-font, section .new-hero-accent-text.accent-font {
+  font-family: var(--font-accent-family, var(--font-body-family)) !important;
+  font-style: var(--font-accent-style, normal) !important;
+  font-weight: var(--font-accent-weight, 400) !important;
+  letter-spacing: var(--font-accent-letter-spacing, 0px) !important;
+  text-transform: var(--font-accent-text-transform, none) !important;
+}
+.accent-font--xs, body .accent-font--xs, .shopify-section .accent-font--xs {
+  font-family: var(--font-accent-family, var(--font-body-family)) !important;
+  font-style: var(--font-accent-style, normal) !important;
+  font-weight: var(--font-accent-weight, 400) !important;
+  letter-spacing: var(--font-accent-letter-spacing, 0px) !important;
+  text-transform: var(--font-accent-text-transform, none) !important;
+  font-size: calc(.75rem * var(--font-accent-scale, 1)) !important;
+}
+.accent-font--sm, body .accent-font--sm, .shopify-section .accent-font--sm {
+  font-family: var(--font-accent-family, var(--font-body-family)) !important;
+  font-style: var(--font-accent-style, normal) !important;
+  font-weight: var(--font-accent-weight, 400) !important;
+  letter-spacing: var(--font-accent-letter-spacing, 0px) !important;
+  text-transform: var(--font-accent-text-transform, none) !important;
+  font-size: calc(.875rem * var(--font-accent-scale, 1)) !important;
+}
+.accent-font--base, body .accent-font--base, .shopify-section .accent-font--base {
+  font-family: var(--font-accent-family, var(--font-body-family)) !important;
+  font-style: var(--font-accent-style, normal) !important;
+  font-weight: var(--font-accent-weight, 400) !important;
+  letter-spacing: var(--font-accent-letter-spacing, 0px) !important;
+  text-transform: var(--font-accent-text-transform, none) !important;
+  font-size: calc(1rem * var(--font-accent-scale, 1)) !important;
+}
+.accent-font--lg, body .accent-font--lg, .shopify-section .accent-font--lg {
+  font-family: var(--font-accent-family, var(--font-body-family)) !important;
+  font-style: var(--font-accent-style, normal) !important;
+  font-weight: var(--font-accent-weight, 400) !important;
+  letter-spacing: var(--font-accent-letter-spacing, 0px) !important;
+  text-transform: var(--font-accent-text-transform, none) !important;
+  font-size: calc(1.125rem * var(--font-accent-scale, 1)) !important;
+}
+.accent-font--xl {
+  font-family: var(--font-accent-family) !important;
+  font-style: var(--font-accent-style);
+  font-weight: var(--font-accent-weight);
+  letter-spacing: var(--font-accent-letter-spacing);
+  text-transform: var(--font-accent-text-transform);
+  font-size: calc(1.25rem * var(--font-accent-scale));
+}
+.accent-font--2xl {
+  font-family: var(--font-accent-family) !important;
+  font-style: var(--font-accent-style);
+  font-weight: var(--font-accent-weight);
+  letter-spacing: var(--font-accent-letter-spacing);
+  text-transform: var(--font-accent-text-transform);
+  font-size: calc(1.5rem * var(--font-accent-scale));
+}
+.accent-font--3xl {
+  font-family: var(--font-accent-family) !important;
+  font-style: var(--font-accent-style);
+  font-weight: var(--font-accent-weight);
+  letter-spacing: var(--font-accent-letter-spacing);
+  text-transform: var(--font-accent-text-transform);
+  font-size: calc(1.875rem * var(--font-accent-scale));
+}
+.accent-font--4xl {
+  font-family: var(--font-accent-family) !important;
+  font-style: var(--font-accent-style);
+  font-weight: var(--font-accent-weight);
+  letter-spacing: var(--font-accent-letter-spacing);
+  text-transform: var(--font-accent-text-transform);
+  font-size: calc(2.25rem * var(--font-accent-scale));
+}
+.accent-font--light {
+  font-family: var(--font-accent-family) !important;
+  font-style: var(--font-accent-style);
+  font-weight: 300;
+  letter-spacing: var(--font-accent-letter-spacing);
+  text-transform: var(--font-accent-text-transform);
+}
+.accent-font--normal {
+  font-family: var(--font-accent-family) !important;
+  font-style: var(--font-accent-style);
+  font-weight: 400;
+  letter-spacing: var(--font-accent-letter-spacing);
+  text-transform: var(--font-accent-text-transform);
+}
+.accent-font--medium {
+  font-family: var(--font-accent-family) !important;
+  font-style: var(--font-accent-style);
+  font-weight: 500;
+  letter-spacing: var(--font-accent-letter-spacing);
+  text-transform: var(--font-accent-text-transform);
+}
+.accent-font--semibold {
+  font-family: var(--font-accent-family) !important;
+  font-style: var(--font-accent-style);
+  font-weight: 600;
+  letter-spacing: var(--font-accent-letter-spacing);
+  text-transform: var(--font-accent-text-transform);
+}
+.accent-font--bold {
+  font-family: var(--font-accent-family) !important;
+  font-style: var(--font-accent-style);
+  font-weight: 700;
+  letter-spacing: var(--font-accent-letter-spacing);
+  text-transform: var(--font-accent-text-transform);
+}
+.accent-font--extrabold {
+  font-family: var(--font-accent-family) !important;
+  font-style: var(--font-accent-style);
+  font-weight: 800;
+  letter-spacing: var(--font-accent-letter-spacing);
+  text-transform: var(--font-accent-text-transform);
+}
+.accent-font--italic {
+  font-family: var(--font-accent-family) !important;
+  font-style: italic;
+  font-weight: var(--font-accent-weight);
+  letter-spacing: var(--font-accent-letter-spacing);
+  text-transform: var(--font-accent-text-transform);
+}
+.accent-font--uppercase {
+  font-family: var(--font-accent-family) !important;
+  font-style: var(--font-accent-style);
+  font-weight: var(--font-accent-weight);
+  letter-spacing: var(--font-accent-letter-spacing);
+  text-transform: uppercase;
+}
+.accent-font--lowercase {
+  font-family: var(--font-accent-family) !important;
+  font-style: var(--font-accent-style);
+  font-weight: var(--font-accent-weight);
+  letter-spacing: var(--font-accent-letter-spacing);
+  text-transform: lowercase;
+}
+.accent-font--capitalize {
+  font-family: var(--font-accent-family) !important;
+  font-style: var(--font-accent-style);
+  font-weight: var(--font-accent-weight);
+  letter-spacing: var(--font-accent-letter-spacing);
+  text-transform: capitalize;
+}
+.accent-font--none {
+  font-family: var(--font-accent-family) !important;
+  font-style: var(--font-accent-style);
+  font-weight: var(--font-accent-weight);
+  letter-spacing: var(--font-accent-letter-spacing);
+  text-transform: none;
+}
+.accent-font--highlight {
+  font-family: var(--font-accent-family) !important;
+  font-style: var(--font-accent-style);
+  font-weight: 600;
+  letter-spacing: var(--font-accent-letter-spacing);
+  text-transform: var(--font-accent-text-transform);
+  font-size: calc(1.125rem * var(--font-accent-scale));
+}
+.accent-font--badge {
+  font-family: var(--font-accent-family) !important;
+  font-style: var(--font-accent-style);
+  font-weight: 500;
+  letter-spacing: var(--font-accent-letter-spacing);
+  text-transform: uppercase;
+  font-size: calc(.75rem * var(--font-accent-scale));
+}
+.accent-font--caption {
+  font-family: var(--font-accent-family) !important;
+  font-style: var(--font-accent-style);
+  font-weight: var(--font-accent-weight);
+  letter-spacing: var(--font-accent-letter-spacing);
+  text-transform: var(--font-accent-text-transform);
+  font-size: calc(.875rem * var(--font-accent-scale));
+  opacity: .8;
+}
+.accent-font--quote {
+  font-family: var(--font-accent-family) !important;
+  font-style: italic;
+  font-weight: var(--font-accent-weight);
+  letter-spacing: var(--font-accent-letter-spacing);
+  text-transform: none;
+  font-size: calc(1.25rem * var(--font-accent-scale));
+}
+@media (max-width: 767px) {
+  .accent-font--responsive {
+    font-size: calc(.875rem * var(--font-accent-scale)) !important;
+  }
+  .accent-font--3xl, .accent-font--4xl {
+    font-size: calc(1.5rem * var(--font-accent-scale)) !important;
+  }
+}
+.no-accent-font {
+  font-family: var(--font-body-family) !important;
+  font-style: var(--font-body-style) !important;
+  font-weight: var(--font-body-weight) !important;
+  letter-spacing: var(--letter-spacing-body) !important;
+  text-transform: none !important;
+}
+.new-hero-accent-text, .accent-text, .global-accent-text, .custom-accent-text {
+  font-family: var(--font-accent-family, var(--font-body-family)) !important;
+}
+html body .shopify-section .accent-font, html body .shopify-section .new-hero-accent-text.accent-font {
+  font-family: var(--font-accent-family, var(--font-body-family)) !important;
+  font-style: var(--font-accent-style, normal) !important;
+  font-weight: var(--font-accent-weight, 400) !important;
+  letter-spacing: var(--font-accent-letter-spacing, 0px) !important;
+  text-transform: var(--font-accent-text-transform, none) !important;
+}
+
+/* 6. selective-heading-fonts.css */
+body:not(.h1-heading-font) h1, body:not(.h1-heading-font) .h1 { font-family: var(--font-body-family) !important; }
+body.h1-heading-font h1, body.h1-heading-font .h1 { font-family: var(--font-heading-family) !important; }
+body:not(.h2-heading-font) h2, body:not(.h2-heading-font) .h2 { font-family: var(--font-body-family) !important; }
+body.h2-heading-font h2, body.h2-heading-font .h2 { font-family: var(--font-heading-family) !important; }
+body:not(.h3-heading-font) h3, body:not(.h3-heading-font) .h3 { font-family: var(--font-body-family) !important; }
+body.h3-heading-font h3, body.h3-heading-font .h3 { font-family: var(--font-heading-family) !important; }
+body:not(.h4-heading-font) h4, body:not(.h4-heading-font) .h4 { font-family: var(--font-body-family) !important; }
+body.h4-heading-font h4, body.h4-heading-font .h4 { font-family: var(--font-heading-family) !important; }
+body:not(.h5-heading-font) h5, body:not(.h5-heading-font) .h5 { font-family: var(--font-body-family) !important; }
+body.h5-heading-font h5, body.h5-heading-font .h5 { font-family: var(--font-heading-family) !important; }
+body:not(.h6-heading-font) h6, body:not(.h6-heading-font) .h6 { font-family: var(--font-body-family) !important; }
+body.h6-heading-font h6, body.h6-heading-font .h6 { font-family: var(--font-heading-family) !important; }
+body:not(.h1-heading-font) span[class*=title], body:not(.h2-heading-font) span[class*=title], body:not(.h3-heading-font) span[class*=title], body:not(.h4-heading-font) span[class*=title], body:not(.h5-heading-font) span[class*=title], body:not(.h6-heading-font) span[class*=title], body:not(.h1-heading-font) span[class*=heading], body:not(.h2-heading-font) span[class*=heading], body:not(.h3-heading-font) span[class*=heading], body:not(.h4-heading-font) span[class*=heading], body:not(.h5-heading-font) span[class*=heading], body:not(.h6-heading-font) span[class*=heading], body:not(.h3-heading-font) span[class*=product-title], body:not(.h1-heading-font) span[class*=section-title], body:not(.h2-heading-font) span[class*=section-title] { font-family: var(--font-body-family) !important; }
+.tab-title, [class*=tab-title], .button-text, [class*=button-text], .nav-title, [class*=nav-title] { font-family: var(--font-body-family) !important; }
+.accent-font, .accent-font-xs, .accent-font-sm, .accent-font-md, .accent-font-lg, .accent-font-xl, .accent-font-2xl, .accent-font-3xl, .accent-font-4xl, .accent-font-5xl, .accent-text, .global-accent-text, .custom-accent-text { font-family: var(--font-accent-family, var(--font-body-family)) !important; }
+.heading-text { font-family: var(--font-heading-family) !important; }
+
+/* 7. typography-system.css */
+:root {
+  --font-body: "Inter", sans-serif;
+  --font-heading: "Inter", sans-serif;
+  --font-weight-light: 300;
+  --font-weight-medium: 500;
+  --letter-spacing-tight: -.3px;
+  --letter-spacing-normal: 0px;
+  --letter-spacing-loose: .5px;
+  --letter-spacing-heading: -.3px;
+  --letter-spacing-body: 0px;
+  --line-height-tight: 1.1;
+  --line-height-normal: 1.4;
+  --line-height-loose: 1.6;
+  --font-size-h1: calc(32px + (48 - 32) * ((100vw - 375px) / (1440 - 375)));
+  --font-size-h2: calc(28px + (40 - 28) * ((100vw - 375px) / (1440 - 375)));
+  --font-size-h3: calc(24px + (32 - 24) * ((100vw - 375px) / (1440 - 375)));
+  --font-size-h4: calc(20px + (24 - 20) * ((100vw - 375px) / (1440 - 375)));
+  --font-size-h5: calc(18px + (20 - 18) * ((100vw - 375px) / (1440 - 375)));
+  --font-size-h6: calc(16px + (18 - 16) * ((100vw - 375px) / (1440 - 375)));
+  --font-size-body-large: calc(18px + (20 - 18) * ((100vw - 375px) / (1440 - 375)));
+  --font-size-body: calc(16px + 0*(100vw - 375px));
+  --font-size-body-small: calc(14px + 0*(100vw - 375px));
+  --font-size-caption: calc(12px + 0*(100vw - 375px));
+  --min-font-size-h1: 32px;
+  --max-font-size-h1: 48px;
+  --min-font-size-h2: 28px;
+  --max-font-size-h2: 40px;
+  --min-font-size-h3: 24px;
+  --max-font-size-h3: 32px;
+}
+h1, .h1 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-heading);
+  margin-bottom: .5em;
+}
+h2, .h2 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-heading);
+  margin-bottom: .5em;
+}
+h3, .h3 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-h3);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-body);
+  margin-bottom: .5em;
+}
+h4, .h4 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-body);
+  margin-bottom: .5em;
+}
+h5, .h5 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-h5);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-body);
+  margin-bottom: .5em;
+}
+h6, .h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-h6);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-body);
+  margin-bottom: .5em;
+}
+body, .body {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-body);
+}
+.body-large {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-body-large);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-body);
+}
+.body-small {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-body);
+}
+.caption {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-body);
+}
+.button-text {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--global-button-font-size, var(--font-size-body-small));
+  line-height: 1.2;
+  letter-spacing: var(--global-button-letter-spacing, var(--letter-spacing-body));
+  text-transform: var(--global-button-text-transform, uppercase);
+}
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-light { font-weight: var(--font-weight-light); }
+.text-regular { font-weight: var(--font-weight-regular); }
+.text-medium { font-weight: var(--font-weight-medium); }
+.text-semibold { font-weight: var(--font-weight-semibold); }
+.text-bold { font-weight: var(--font-weight-bold); }
+span, div:not([class^=shopify]), p:not([class^=shopify]), button:not([class^=shopify]), a:not([class^=shopify]) {
+  font-family: var(--font-body-family-override) !important;
+}
+span[class*=title], span[class*=heading], span[class*=product-title], span[class*=section-title] {
+  font-family: var(--font-heading-family-override) !important;
+}
+.check-yes, .check-no, .text-value, .feature-name, .product-subtitle, .product-title, .reviewer-name, .carousel-reviewer-name, .rating-text, .unique-rating-text, .benefit-text, .counter-prefix, .counter-number, .counter-suffix {
+  font-family: var(--font-body-family-override) !important;
+}
+@media screen and (max-width: 375px) {
+  h1, .h1 { font-size: var(--min-font-size-h1); }
+  h2, .h2 { font-size: var(--min-font-size-h2); }
+  h3, .h3 { font-size: var(--min-font-size-h3); }
+}
+@media screen and (min-width: 1440px) {
+  h1, .h1 { font-size: var(--max-font-size-h1); }
+  h2, .h2 { font-size: var(--max-font-size-h2); }
+  h3, .h3 { font-size: var(--max-font-size-h3); }
+}
