@@ -71,6 +71,7 @@
         {%- if product.media.size > 0 -%}
           {%- for media in product.media -%}
             <img class="shop-main-image {% if forloop.first %}active{% endif %}"
+                 id="shop-image{{ forloop.index }}"
                  src="{{ media | image_url: width: 600, height: 600 }}"
                  srcset="{{ media | image_url: width: 600, height: 600 }} 1x, {{ media | image_url: width: 1200, height: 1200 }} 2x"
                  alt="{{ media.alt | default: product.title | escape }}"
@@ -81,7 +82,17 @@
                  {% if forloop.first %}fetchpriority="high"{% endif %}>
           {%- endfor -%}
         {%- else -%}
-          <img class="shop-main-image active" src="{{ 'product-main.jpg' | asset_url }}" loading="eager" width="600" height="600" fetchpriority="high">
+          <!-- Fallback to hardcoded demo main images if product has no media -->
+          <img class="shop-main-image active" id="shop-image1" src="{{ 'product-main.jpg' | asset_url }}" loading="eager" width="600" height="600" fetchpriority="high">
+          <img class="shop-main-image" id="shop-image2" src="{{ 'product-components.jpg' | asset_url }}" loading="lazy" width="600" height="600">
+          <img class="shop-main-image" id="shop-image3" src="{{ 'review-1-nursery.jpg' | asset_url }}" loading="lazy" width="600" height="600">
+          <img class="shop-main-image" id="shop-image4" src="{{ 'review-2-handheld.jpg' | asset_url }}" loading="lazy" width="600" height="600">
+          <img class="shop-main-image" id="shop-image5" src="{{ 'product-screen.jpg' | asset_url }}" loading="lazy" width="600" height="600">
+          <img class="shop-main-image" id="shop-image6" src="{{ 'product-lifestyle.jpg' | asset_url }}" loading="lazy" width="600" height="600">
+          <img class="shop-main-image" id="shop-image7" src="{{ 'product-safety.jpg' | asset_url }}" loading="lazy" width="600" height="600">
+          <img class="shop-main-image" id="shop-image8" src="{{ 'why-1-massage.jpg' | asset_url }}" loading="lazy" width="600" height="600">
+          <img class="shop-main-image" id="shop-image9" src="{{ 'why-2-battery.jpg' | asset_url }}" loading="lazy" width="600" height="600">
+          <img class="shop-main-image" id="shop-image10" src="{{ 'why-3-silent.jpg' | asset_url }}" loading="lazy" width="600" height="600">
         {%- endif -%}
       </div>
     </div>
@@ -101,67 +112,76 @@
         
 
         <div class="shop-thumbnails toggle-product-variants mobile-2x2-grid" id="thumbnail-container--1779801902021">
-          
-            <div class="shop-thumbnail active  " data-target="shop-image1" data-index="0" data-media-id="70392114053201">
+          {%- if product.media.size > 0 -%}
+            {%- for media in product.media -%}
+              <div class="shop-thumbnail {% if forloop.first %}active{% endif %}" data-target="shop-image{{ forloop.index }}" data-index="{{ forloop.index0 }}" data-media-id="{{ media.id }}">
+                <div class="thumb-square">
+                  <img src="{{ media | image_url: width: 150, height: 150 }}" alt="{{ media.alt | default: product.title | escape }}" loading="lazy" data-media-id="{{ media.id }}" width="150" height="150">
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            <!-- Fallback to hardcoded demo thumbnails if product has no media -->
+            <div class="shop-thumbnail active" data-target="shop-image1" data-index="0" data-media-id="70392114053201">
               <div class="thumb-square">
                 <img src="{{ 'product-main.jpg' | asset_url }}" alt="{{ product.title }}" loading="lazy" data-media-id="70392114053201" width="" height="">
               </div>
             </div>
           
-            <div class="shop-thumbnail   " data-target="shop-image2" data-index="1" data-media-id="67859243073617">
+            <div class="shop-thumbnail" data-target="shop-image2" data-index="1" data-media-id="67859243073617">
               <div class="thumb-square">
                 <img src="{{ 'product-components.jpg' | asset_url }}" alt="{{ product.title }}" loading="lazy" data-media-id="67859243073617" width="" height="">
               </div>
             </div>
           
-            <div class="shop-thumbnail   " data-target="shop-image3" data-index="2" data-media-id="67481776422993">
+            <div class="shop-thumbnail" data-target="shop-image3" data-index="2" data-media-id="67481776422993">
               <div class="thumb-square">
                 <img src="{{ 'review-1-nursery.jpg' | asset_url }}" alt="{{ product.title }}" loading="lazy" data-media-id="67481776422993" width="" height="">
               </div>
             </div>
           
-            <div class="shop-thumbnail   " data-target="shop-image4" data-index="3" data-media-id="67481780846673">
+            <div class="shop-thumbnail" data-target="shop-image4" data-index="3" data-media-id="67481780846673">
               <div class="thumb-square">
                 <img src="{{ 'review-2-handheld.jpg' | asset_url }}" alt="{{ product.title }}" loading="lazy" data-media-id="67481780846673" width="" height="">
               </div>
             </div>
           
-            <div class="shop-thumbnail   " data-target="shop-image5" data-index="4" data-media-id="67859245138001">
+            <div class="shop-thumbnail" data-target="shop-image5" data-index="4" data-media-id="67859245138001">
               <div class="thumb-square">
                 <img src="{{ 'product-screen.jpg' | asset_url }}" alt="{{ product.title }}" loading="lazy" data-media-id="67859245138001" width="" height="">
               </div>
             </div>
           
-            <div class="shop-thumbnail   " data-target="shop-image6" data-index="5" data-media-id="67859245596753">
+            <div class="shop-thumbnail" data-target="shop-image6" data-index="5" data-media-id="67859245596753">
               <div class="thumb-square">
                 <img src="{{ 'product-lifestyle.jpg' | asset_url }}" alt="{{ product.title }}" loading="lazy" data-media-id="67859245596753" width="" height="">
               </div>
             </div>
           
-            <div class="shop-thumbnail   " data-target="shop-image7" data-index="6" data-media-id="67859246481489">
+            <div class="shop-thumbnail" data-target="shop-image7" data-index="6" data-media-id="67859246481489">
               <div class="thumb-square">
                 <img src="{{ 'product-safety.jpg' | asset_url }}" alt="{{ product.title }}" loading="lazy" data-media-id="67859246481489" width="" height="">
               </div>
             </div>
           
-            <div class="shop-thumbnail   " data-target="shop-image8" data-index="7" data-media-id="67859247300689">
+            <div class="shop-thumbnail" data-target="shop-image8" data-index="7" data-media-id="67859247300689">
               <div class="thumb-square">
                 <img src="{{ 'why-1-massage.jpg' | asset_url }}" alt="{{ product.title }}" loading="lazy" data-media-id="67859247300689" width="" height="">
               </div>
             </div>
           
-            <div class="shop-thumbnail   " data-target="shop-image9" data-index="8" data-media-id="67859248152657">
+            <div class="shop-thumbnail" data-target="shop-image9" data-index="8" data-media-id="67859248152657">
               <div class="thumb-square">
                 <img src="{{ 'why-2-battery.jpg' | asset_url }}" alt="{{ product.title }}" loading="lazy" data-media-id="67859248152657" width="" height="">
               </div>
             </div>
           
-            <div class="shop-thumbnail   " data-target="shop-image10" data-index="9" data-media-id="67859248382033">
+            <div class="shop-thumbnail" data-target="shop-image10" data-index="9" data-media-id="67859248382033">
               <div class="thumb-square">
                 <img src="{{ 'why-3-silent.jpg' | asset_url }}" alt="{{ product.title }}" loading="lazy" data-media-id="67859248382033" width="" height="">
               </div>
             </div>
-          
+          {%- endif -%}
         </div>
 
         <!-- Mobile arrows at end of thumbnails (when placement is below and thumbnails are visible) -->
