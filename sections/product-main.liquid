@@ -56,6 +56,7 @@
 
 <link href="{{ 'shop-product-details.css' | asset_url }}" rel="stylesheet" type="text/css" media="all">
 <link href="{{ 'variant-selector.css' | asset_url }}" rel="stylesheet" type="text/css" media="all">
+{{ 'section-main-product.css' | asset_url | stylesheet_tag }}
 
 
 <div class="shop-product-section" data-show-mobile-arrows="false">
@@ -190,7 +191,14 @@
 
         <!-- Product Information Column -->
         
-          <div class="shop-product-info">
+          <product-info
+            id="ProductInfo-{{ section.id }}"
+            data-section="{{ section.id }}"
+            data-url="{{ product.url }}"
+            class="shop-product-info product__info-container"
+            style="display: block;"
+          >
+          {%- assign product_form_id = 'product-form-' | append: section.id -%}
             
   
       <div class="shop-award-badge" id="block-award_badge_nFWJ86">
@@ -362,381 +370,36 @@
 
 
       
-<!-- Visual Variant & Color Swatches -->
-{%- if product.has_only_default_variant == false -%}
-  <div class="product-variant-swatches" style="margin: 20px 0 10px; direction: rtl; text-align: right;">
-    {%- for option in product.options_with_values -%}
-      <div class="variant-option-group" style="margin-bottom: 16px;" data-option-index="{{ option.position }}">
-        <label style="font-size: 14px; font-weight: 800; color: #121212; display: block; margin-bottom: 8px;">{{ option.name }}</label>
-        <div class="swatches-container" style="display: flex; gap: 10px; flex-wrap: wrap;">
-          {%- for value in option.values -%}
-            {%- assign is_color = false -%}
-            {%- assign downcase_name = option.name | downcase -%}
-            {%- if downcase_name contains 'color' or downcase_name contains 'لون' -%}
-              {%- assign is_color = true -%}
-            {%- endif -%}
-            
-            <button type="button" 
-                    class="swatch-button {% if option.selected_value == value %}swatch-active{% endif %}" 
-                    data-option-position="{{ option.position }}" 
-                    data-value="{{ value | escape }}"
-                    style="border: 2px solid {% if option.selected_value == value %}{{ section.settings.accent_color | default: '#cb6387' }}{% else %}#e5e5e5{% endif %}; border-radius: 20px; padding: 8px 18px; background: #fff; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px;">
-              {%- if is_color -%}
-                <span class="color-dot" style="width: 14px; height: 14px; border-radius: 50%; background-color: {{ value | escape }}; border: 1px solid #ccc; display: inline-block;"></span>
-              {%- endif -%}
-              {{ value }}
-            </button>
-          {%- endfor -%}
+      <!-- Native Shopify Product Form and Purchase components -->
+      <div class="product-native-purchase-flow" id="ProductNativePurchase-{{ section.id }}" style="margin: 20px 0; direction: rtl; text-align: right;">
+        <!-- Product Price -->
+        <div class="no-js-hidden" id="price-{{ section.id }}" role="status" style="margin-bottom: 15px;">
+          {%- render 'price',
+            product: product,
+            use_variant: true,
+            show_badges: true,
+            price_class: 'price--large'
+          -%}
         </div>
+
+        <!-- Product Variant Picker -->
+        {%- unless product.has_only_default_variant -%}
+          {%- render 'product-variant-picker',
+            product: product,
+            block: section,
+            product_form_id: product_form_id
+          -%}
+        {%- endunless -%}
+
+        <!-- Product Buy Buttons -->
+        {%- render 'buy-buttons',
+          product: product,
+          block: section,
+          product_form_id: product_form_id,
+          section_id: section.id,
+          show_pickup_availability: true
+        -%}
       </div>
-    {%- endfor -%}
-  </div>
-  
-  <input type="hidden" name="id" id="selectedVariantId" value="{{ product.selected_or_first_available_variant.id }}">
-  
-  <script type="application/json" id="VariantJson-{{ section.id }}">
-    {{ product.variants | json }}
-  </script>
-
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var swatchGroups = document.querySelectorAll('.variant-option-group');
-    var variantJsonEl = document.getElementById('VariantJson-{{ section.id }}');
-    var hiddenVariantInput = document.getElementById('selectedVariantId');
-    var formVariantInput = document.querySelector('form input[name="id"]');
-    
-    if (!variantJsonEl) return;
-    
-    var variants = JSON.parse(variantJsonEl.textContent);
-    
-    swatchGroups.forEach(function(group) {
-      var buttons = group.querySelectorAll('.swatch-button');
-      var position = parseInt(group.dataset.optionIndex);
-      
-      buttons.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          buttons.forEach(function(b) {
-            b.style.borderColor = '#e5e5e5';
-            b.classList.remove('swatch-active');
-          });
-          
-          var accentColor = '{{ section.settings.accent_color | default: "#cb6387" }}';
-          btn.style.borderColor = accentColor;
-          btn.classList.add('swatch-active');
-          
-          updateSelectedVariant();
-        });
-      });
-    });
-    
-    function updateSelectedVariant() {
-      var selectedOptions = {};
-      document.querySelectorAll('.variant-option-group').forEach(function(group) {
-        var activeBtn = group.querySelector('.swatch-button.swatch-active');
-        if (activeBtn) {
-          var position = group.dataset.optionIndex;
-          selectedOptions['option' + position] = activeBtn.dataset.value;
-        }
-      });
-      
-      var matchedVariant = variants.find(function(v) {
-        var match = true;
-        for (var key in selectedOptions) {
-          if (v[key] !== selectedOptions[key]) {
-            match = false;
-            break;
-          }
-        }
-        return match;
-      });
-      
-      if (matchedVariant) {
-        if (hiddenVariantInput) hiddenVariantInput.value = matchedVariant.id;
-        if (formVariantInput) formVariantInput.value = matchedVariant.id;
-        
-        var offerText = document.getElementById('modalOfferText');
-        var priceVal = (matchedVariant.price / 100).toFixed(0);
-        
-        var activeCard = document.querySelector('.offer-inline-card--active');
-        if (activeCard && activeCard.dataset.qty === '1') {
-          activeCard.dataset.price = priceVal;
-          var priceTextEl = activeCard.querySelector('div[style*="font-size: 22px"]');
-          if (priceTextEl) priceTextEl.innerHTML = priceVal + ' <small style="font-size: 13px; font-weight: 600;">درهم</small>';
-          
-          if (offerText) {
-            var titleElement = activeCard.querySelector('div[style*="font-size: 16px"]');
-            var title = titleElement ? titleElement.textContent.trim() : '1 قطعة';
-            offerText.textContent = title + ' — ' + priceVal + ' درهم';
-          }
-        }
-        
-        if (matchedVariant.featured_media && matchedVariant.featured_media.id) {
-          var thumb = document.querySelector('.shop-thumbnail[data-media-id="' + matchedVariant.featured_media.id + '"]');
-          if (thumb) thumb.click();
-        }
-      }
-    }
-  });
-  </script>
-{%- endif -%}
-
-<!-- Inline Offer Bundle (Dynamic Block-based Visual Bundle Selector) -->
-<div class="offer-bundle-inline" style="margin: 16px 0 8px;">
-  <div class="offer-bundle-header" style="margin-bottom: 16px;">
-    <p style="font-size: 14px; font-weight: 700; color: #121212; text-align: center; margin: 0 0 4px; border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 10px 0; letter-spacing: 0.5px;">شري كثر — ووفري كثر</p>
-  </div>
-
-  <div class="offer-inline-cards" style="display: flex; flex-direction: column; gap: 10px;">
-    {%- assign bundle_count = 0 -%}
-    {%- for block in section.blocks -%}
-      {%- if block.type == 'bundle_card' -%}
-        {%- assign bundle_count = bundle_count | plus: 1 -%}
-        {%- assign card_image = block.settings.image | default: product.featured_image -%}
-        
-        <div class="offer-inline-card {% if block.settings.is_active %}offer-inline-card--active{% endif %}" 
-             data-qty="{{ block.settings.qty | escape }}" 
-             data-price="{{ block.settings.price | escape }}" 
-             {{ block.shopify_attributes }}
-             style="border: 2px solid {% if block.settings.is_active %}{{ section.settings.accent_color | default: '#cb6387' }}{% else %}#e5e5e5{% endif %}; border-radius: 14px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: all 0.2s; position: relative; background: {% if block.settings.is_active %}linear-gradient(180deg, {{ section.settings.accent_color_light | default: '#fff5f7' }} 0%, #fff 100%){% else %}#fff{% endif %}; {% if block.settings.is_active %}box-shadow: 0 4px 16px rgba(203, 99, 135, 0.12);{% endif %}">
-          
-          {%- if block.settings.badge != blank -%}
-            <div style="position: absolute; top: -10px; left: 14px; background: {{ section.settings.accent_color | default: '#cb6387' }}; color: #fff; font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 20px; letter-spacing: 0.3px;">
-              {{ block.settings.badge }}
-            </div>
-          {%- endif -%}
-
-          <div style="display: flex; align-items: center; gap: 14px;">
-            {%- if card_image != blank -%}
-              <img src="{{ card_image | image_url: width: 110, height: 110 }}" alt="{{ block.settings.title | escape }}" style="width: 55px; height: 55px; border-radius: 10px; object-fit: cover;">
-            {%- else -%}
-              <img src="{{ 'product-main.jpg' | asset_url }}" alt="Default Image" style="width: 55px; height: 55px; border-radius: 10px; object-fit: cover;">
-            {%- endif -%}
-            <div>
-              <div style="font-size: 16px; font-weight: 800; color: #121212;">
-                {{ block.settings.title }}
-                {%- if block.settings.discount_badge != blank -%}
-                  <span style="background: linear-gradient(135deg, #ef4a65, {{ section.settings.accent_color | default: '#cb6387' }}); color: #fff; font-size: 11px; padding: 2px 8px; border-radius: 6px; margin-right: 6px;">{{ block.settings.discount_badge }}</span>
-                {%- endif -%}
-              </div>
-              {%- if block.settings.sub_text != blank -%}
-                <div style="font-size: 12px; color: #888; margin-top: 2px;">{{ block.settings.sub_text }}</div>
-              {%- endif -%}
-            </div>
-          </div>
-
-          <div style="text-align: left;">
-            {%- if block.settings.compare_at_price != blank and block.settings.compare_at_price != "0" -%}
-              <div style="font-size: 14px; color: #aaa; text-decoration: line-through;">{{ block.settings.compare_at_price }} درهم</div>
-            {%- endif -%}
-            <div style="font-size: 22px; font-weight: 900; color: {% if block.settings.is_active %}{{ section.settings.accent_color | default: '#cb6387' }}{% else %}#121212{% endif %};">
-              {{ block.settings.price }} <small style="font-size: 13px; font-weight: 600;">درهم</small>
-            </div>
-          </div>
-        </div>
-      {%- endif -%}
-    {%- endfor -%}
-    
-    {%- if bundle_count == 0 -%}
-      <p style="text-align: center; color: #888; padding: 10px;">الرجاء إضافة عروض (Bundle Blocks) من إعدادات القالب.</p>
-    {%- endif -%}
-  </div>
-
-  <!-- Trust line -->
-  <div style="display: flex; justify-content: center; gap: 20px; margin-top: 12px; flex-wrap: wrap;">
-    <span style="font-size: 12px; color: #666; display: flex; align-items: center; gap: 4px;">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" fill="#4CAF50"/><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" fill="white"/></svg>
-      الدفع عند الإستلام
-    </span>
-    <span style="font-size: 12px; color: #666; display: flex; align-items: center; gap: 4px;">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" fill="#4CAF50"/><path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" fill="#4CAF50"/></svg>
-      توصيل 24-48 ساعة
-    </span>
-    <span style="font-size: 12px; color: #666; display: flex; align-items: center; gap: 4px;">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" fill="#4CAF50"/><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" fill="white"/></svg>
-      ضمان 60 يوم
-    </span>
-  </div>
-</div>
-
-<!-- Order Form Modal -->
-<div class="order-modal-overlay" id="orderModal">
-  <div class="order-modal">
-    <button class="order-modal-close" id="orderModalClose">&times;</button>
-    <div class="order-modal-header">
-      <h3>{{ section.settings.form_heading | default: "أكملي الطلب ديالك" }}</h3>
-      <p class="order-modal-offer" id="modalOfferText">2 قطع — {{ product.price | money }}</p>
-      <p class="order-modal-payment">💳 الدفع عند الإستلام</p>
-    </div>
-    <form class="order-form" id="orderForm" novalidate>
-      <input type="hidden" id="orderQty" name="qty">
-      <input type="hidden" id="orderPrice" name="price">
-
-      <div class="form-group">
-        <label for="fullName">{{ section.settings.name_label | default: "الاسم الكامل" }} *</label>
-        <input type="text" id="fullName" name="fullName" placeholder="مثال: فاطمة الزهراء بنعلي" required>
-        <span class="form-error" id="fullNameError">المرجو كتابة {{ section.settings.name_label | default: "الاسم الكامل" }} ديالك</span>
-      </div>
-
-      <div class="form-group">
-        <label for="fullAddress">{{ section.settings.address_label | default: "العنوان الكامل" }} *</label>
-        <input type="text" id="fullAddress" name="fullAddress" placeholder="مثال: شارع الحسن الثاني، رقم 15، دار البيضاء" required>
-        <span class="form-error" id="fullAddressError">المرجو كتابة {{ section.settings.address_label | default: "العنوان الكامل" }} ديالك</span>
-      </div>
-
-      <div class="form-group">
-        <label for="phoneNumber">{{ section.settings.phone_label | default: "رقم الهاتف" }} *</label>
-        <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="مثال: 0612345678" required dir="ltr">
-        <span class="form-error" id="phoneNumberError">المرجو كتابة {{ section.settings.phone_label | default: "رقم الهاتف" }} ديالك</span>
-      </div>
-
-      <button type="submit" class="order-submit-btn">
-        <span class="btn-text">{{ section.settings.submit_button_text | default: "تأكيد الطلب" }}</span>
-        <span class="btn-loading" style="display:none;">جاري التحميل...</span>
-      </button>
-
-      <p class="order-form-note">🔒 معلوماتك محمية وآمنة. ما كاتخلصي حتى يوصلك المنتج.</p>
-    </form>
-  </div>
-</div>
-
-<script>
-  window.ShopifyLandingConfig = {
-    upsellEnabled: {{ section.settings.upsell_enabled | json }},
-    upsellVariantId: {{ section.settings.upsell_variant_id | json }}
-  };
-</script>
-
-{%- if section.settings.upsell_enabled -%}
-<!-- One-Click Audio Upsell Modal -->
-<div class="order-modal-overlay" id="upsellModal" style="display: none; align-items: center; justify-content: center; z-index: 100000;">
-  <div class="order-modal" style="max-width: 480px; position: relative; border: 2px solid #cb6387; border-radius: 14px; background: #fff; padding: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); direction: rtl; text-align: right;">
-    <button type="button" class="order-modal-close" id="upsellModalClose" style="position: absolute; top: 10px; right: 15px; font-size: 28px; border: none; background: none; cursor: pointer; color: #888;">&times;</button>
-    <div class="order-modal-header" style="text-align: center; margin-bottom: 12px;">
-      <h3 style="font-size: 22px; color: #cb6387; font-weight: 800; margin: 0 0 4px;">🎁 عرض خاص ومحدود جداً!</h3>
-      <p style="font-size: 15px; color: #121212; font-weight: 700; margin: 4px 0 0;">{{ section.settings.upsell_title }}</p>
-    </div>
-    
-    <div style="text-align: center; margin: 15px 0;">
-      {%- if section.settings.upsell_image != blank -%}
-        <img src="{{ section.settings.upsell_image | image_url: width: 300, height: 300 }}" alt="{{ section.settings.upsell_title }}" style="width: 140px; height: 140px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-      {%- else -%}
-        <img src="{{ 'product-main.jpg' | asset_url }}" alt="Upsell Image" style="width: 140px; height: 140px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-      {%- endif -%}
-    </div>
-    
-    <div class="upsell-description" style="font-size: 14px; text-align: center; color: #555; line-height: 1.5; padding: 0 10px; margin-bottom: 15px;">
-      {{ section.settings.upsell_description }}
-    </div>
-
-    <!-- Audio Player (Voice Note) -->
-    {%- if section.settings.upsell_audio_url != blank -%}
-      <div class="upsell-audio-container" style="background: #fff5f7; border: 1px dashed #cb6387; border-radius: 10px; padding: 12px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; direction: rtl; text-align: right;">
-        <button type="button" id="upsellPlayBtn" style="background: #cb6387; color: white; border: none; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; padding: 0;">
-          <svg id="upsellPlayIcon" width="16" height="16" viewBox="0 0 24 24" fill="white" style="position: relative; left: -1px;"><path d="M8 5v14l11-7z"/></svg>
-          <svg id="upsellPauseIcon" width="16" height="16" viewBox="0 0 24 24" fill="white" style="display: none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-        </button>
-        <div style="flex-grow: 1; text-align: right;">
-          <p style="font-size: 12px; font-weight: 700; color: #cb6387; margin: 0 0 4px;">🔊 رسالة صوتية توجيهية (اضغطي للاستماع)</p>
-          <div style="background: #ddd; height: 4px; border-radius: 2px; position: relative; overflow: hidden; width: 100%;">
-            <div id="upsellAudioProgress" style="background: #cb6387; height: 100%; width: 0%; transition: width 0.1s linear;"></div>
-          </div>
-        </div>
-        <audio id="upsellAudio" src="{{ section.settings.upsell_audio_url }}"></audio>
-      </div>
-    {%- endif -%}
-
-    <div style="text-align: center; margin: 15px 0;">
-      <span style="font-size: 14px; color: #aaa; text-decoration: line-through; margin-left: 8px;">{{ section.settings.upsell_compare_price }} درهم</span>
-      <span style="font-size: 24px; font-weight: 900; color: #ef4a65;">{{ section.settings.upsell_price }} <small style="font-size: 14px; font-weight: 600;">درهم فقط!</small></span>
-    </div>
-
-    <div style="display: flex; flex-direction: column; gap: 8px;">
-      <button type="button" class="order-submit-btn" id="upsellAcceptBtn" style="background-color: #ef4a65 !important; color: white !important; font-weight: bold !important; border-radius: 40px !important; border: none; padding: 12px; font-size: 15px; cursor: pointer; transition: all 0.2s;">
-        {{ section.settings.upsell_yes_btn }}
-      </button>
-      <button type="button" id="upsellDeclineBtn" style="background: none; border: none; color: #888; font-size: 13px; text-decoration: underline; cursor: pointer; padding: 5px;">
-        {{ section.settings.upsell_no_btn }}
-      </button>
-    </div>
-  </div>
-</div>
-{%- endif -%}
-
-<script>
-// Inline offer card selection + inline form synchronization
-(function() {
-  document.addEventListener('DOMContentLoaded', function() {
-    var cards = document.querySelectorAll('.offer-inline-card');
-    var qtyInput = document.getElementById('orderQty');
-    var priceInput = document.getElementById('orderPrice');
-    var offerText = document.getElementById('modalOfferText');
-
-    function syncOffer(qty, price, title) {
-      if (qtyInput) qtyInput.value = qty;
-      if (priceInput) priceInput.value = price;
-      if (offerText) offerText.textContent = title + ' — ' + price + ' درهم';
-    }
-
-    // Sync initial preselected offer on page load
-    var initialActive = document.querySelector('.offer-inline-card--active') || document.querySelector('.offer-inline-card');
-    if (initialActive) {
-      var initialQty = initialActive.dataset.qty || "1";
-      var initialPrice = initialActive.dataset.price || "0";
-      var titleElement = initialActive.querySelector('div[style*="font-size: 16px"]');
-      var initialTitle = titleElement ? titleElement.textContent.replace(/[\n\r]+/g, ' ').replace(/\s+/g, ' ').trim() : (initialQty + ' قطعة');
-      syncOffer(initialQty, initialPrice, initialTitle);
-    }
-
-    cards.forEach(function(card) {
-      card.addEventListener('click', function() {
-        // Update selection visuals
-        cards.forEach(function(c) {
-          c.style.borderColor = '#e5e5e5';
-          c.style.background = '#fff';
-          c.style.boxShadow = 'none';
-          c.classList.remove('offer-inline-card--active');
-        });
-        
-        var accentColor = '{{ section.settings.accent_color | default: "#cb6387" }}';
-        var accentBg = 'linear-gradient(180deg, {{ section.settings.accent_color_light | default: "#fff5f7" }} 0%, #fff 100%)';
-        
-        card.style.borderColor = accentColor;
-        card.style.background = accentBg;
-        card.style.boxShadow = '0 4px 16px rgba(203, 99, 135, 0.12)';
-        card.classList.add('offer-inline-card--active');
-
-        // Sync clicked card values to the inline form instantly
-        var qty = card.dataset.qty;
-        var price = card.dataset.price;
-        var titleElement = card.querySelector('div[style*="font-size: 16px"]');
-        var title = titleElement ? titleElement.textContent.replace(/[\n\r]+/g, ' ').replace(/\s+/g, ' ').trim() : (qty + ' قطعة');
-        
-        syncOffer(qty, price, title);
-      });
-    });
-
-    // Make the main CTA button scroll smoothly to the offers section & focus input
-    var mainCTA = document.getElementById('ProductSubmitButton-template--28684899876945__main');
-    if (mainCTA) {
-      mainCTA.type = 'button';
-      mainCTA.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        var targetSection = document.querySelector('.offer-bundle-inline');
-        if (targetSection) {
-          targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          setTimeout(function() {
-            var fullName = document.getElementById('fullName');
-            if (fullName) fullName.focus();
-          }, 800);
-        }
-      });
-    }
-  });
-})();
-</script>
-
-</product-form>
       </div>
       
 
@@ -940,7 +603,7 @@
 
             
 
-          </div>
+          </product-info>
         
       </div>
     
@@ -1267,7 +930,7 @@
   <script>
   (function() {
     var stickyBtn = document.getElementById('sticky-order-btn');
-    var formSection = document.querySelector('.offer-bundle-inline');
+    var purchaseSection = document.getElementById('ProductNativePurchase-{{ section.id }}');
 
     if (stickyBtn) {
       // Display logic: show on mobile
@@ -1283,17 +946,17 @@
       });
 
       {%- unless request.design_mode -%}
-      // Hide sticky button when checkout form is visible in live view
-      if (formSection) {
+      // Hide sticky button when purchase flow is visible in live view
+      if (purchaseSection) {
         var observer = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
             if (entry.isIntersecting) {
-              // Form is visible -> hide sticky button
+              // Purchase flow is visible -> hide sticky button
               stickyBtn.style.transform = 'translateY(120%)';
               stickyBtn.style.opacity = '0';
               stickyBtn.style.pointerEvents = 'none';
             } else {
-              // Form not visible -> show sticky button
+              // Purchase flow not visible -> show sticky button
               stickyBtn.style.transform = 'translateY(0)';
               stickyBtn.style.opacity = '1';
               stickyBtn.style.pointerEvents = 'auto';
@@ -1301,7 +964,7 @@
           });
         }, { threshold: 0.1 });
 
-        observer.observe(formSection);
+        observer.observe(purchaseSection);
       }
       {%- else -%}
       // In shopify editor design mode, make it always visible inside the mobile iframe preview
@@ -1313,14 +976,9 @@
   })();
 
   function stickyOrderScroll() {
-    var target = document.querySelector('.offer-bundle-inline');
+    var target = document.getElementById('ProductNativePurchase-{{ section.id }}');
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      // Focus first input after scroll
-      setTimeout(function() {
-        var firstInput = document.getElementById('fullName');
-        if (firstInput) firstInput.focus();
-      }, 750);
     }
   }
   </script>
@@ -1334,6 +992,34 @@
       "type": "product",
       "id": "featured_product",
       "label": "المنتج المعروض على صفحة الهبوط"
+    },
+    {
+      "type": "select",
+      "id": "picker_type",
+      "options": [
+        {
+          "value": "dropdown",
+          "label": "Dropdown"
+        },
+        {
+          "value": "button",
+          "label": "Pills/Buttons"
+        }
+      ],
+      "default": "button",
+      "label": "Variant picker type"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dynamic_checkout",
+      "default": true,
+      "label": "Show dynamic checkout button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_gift_card_recipient",
+      "default": false,
+      "label": "Show gift card recipient form"
     },
     {
       "type": "checkbox",
