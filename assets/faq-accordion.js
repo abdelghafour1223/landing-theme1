@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    const faqContainer = document.querySelector('#store-faq-template--28684899876945__store_faq_Lpd3PW');
+    const faqContainer = document.querySelector('.store-faq');
     if (!faqContainer) return;
     
     const faqItems = faqContainer.querySelectorAll('.faq-item');
